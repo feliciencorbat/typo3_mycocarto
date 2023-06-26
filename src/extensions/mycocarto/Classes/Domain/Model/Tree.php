@@ -6,7 +6,7 @@ class Tree extends AbstractEntity
 {
     protected string $name;
 
-    protected string $scientifiName;
+    protected string $scientificName;
 
     /**
      * @return string
@@ -27,16 +27,16 @@ class Tree extends AbstractEntity
     /**
      * @return string
      */
-    public function getScientifiName(): string
+    public function getScientificName(): string
     {
-        return $this->scientifiName;
+        return $this->scientificName;
     }
 
     /**
-     * @param string $scientifiName
+     * @param string $scientificName
      */
-    public function setScientifiName(string $scientifiName): void
+    public function setScientificName(string $scientificName): void
     {
-        $this->scientifiName = $scientifiName;
+        $this->scientificName = $scientificName;
     }
 }
