@@ -1,0 +1,21 @@
+{
+    "name": "feliciencorbat/mycocarto",
+    "description": "Extension to manage fungis cartography.",
+    "type": "typo3-cms-extension",
+    "license": [
+        "GPL-2.0-or-later"
+    ],
+    "require": {
+        "typo3/cms-core": "^12.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Feliciencorbat\\Mycocarto\\": "Classes/"
+        }
+    },
+    "extra": {
+        "typo3/cms": {
+            "extension-key": "mycocarto"
+        }
+    }
+}

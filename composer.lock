@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "1f0ea8d94ae95603338123440f2afdb3",
+    "content-hash": "b227dedae3b7a0dd6fd2451de820f777",
     "packages": [
         {
             "name": "bacon/bacon-qr-code",
@@ -955,6 +955,36 @@
                 "source": "https://github.com/darylldoyle/svg-sanitizer/tree/0.15.4"
             },
             "time": "2022-02-21T09:13:59+00:00"
+        },
+        {
+            "name": "feliciencorbat/mycocarto",
+            "version": "dev-main",
+            "dist": {
+                "type": "path",
+                "url": "src/extensions/mycocarto",
+                "reference": "3234645c97a29001632828fb275e253fe8d4946d"
+            },
+            "require": {
+                "typo3/cms-core": "^12.0"
+            },
+            "type": "typo3-cms-extension",
+            "extra": {
+                "typo3/cms": {
+                    "extension-key": "mycocarto"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Feliciencorbat\\Mycocarto\\": "Classes/"
+                }
+            },
+            "license": [
+                "GPL-2.0-or-later"
+            ],
+            "description": "Extension to manage fungis cartography.",
+            "transport-options": {
+                "relative": true
+            }
         },
         {
             "name": "firebase/php-jwt",
@@ -7150,10 +7180,75 @@
             "time": "2022-06-03T18:03:27+00:00"
         }
     ],
-    "packages-dev": [],
+    "packages-dev": [
+        {
+            "name": "b13/make",
+            "version": "0.1.6",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/b13/make.git",
+                "reference": "3ea851ec6a46231660e8fabeeefd1559cfc56d1e"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/b13/make/zipball/3ea851ec6a46231660e8fabeeefd1559cfc56d1e",
+                "reference": "3ea851ec6a46231660e8fabeeefd1559cfc56d1e",
+                "shasum": ""
+            },
+            "require": {
+                "typo3/cms-core": "^10.0 || ^11.0 || ^12.0"
+            },
+            "require-dev": {
+                "phpstan/phpstan": "^0.12.37",
+                "phpunit/phpunit": "^8.4",
+                "roave/security-advisories": "dev-master",
+                "typo3/coding-standards": "^0.4.0",
+                "typo3/tailor": "^1.4",
+                "typo3/testing-framework": "^6.1"
+            },
+            "type": "typo3-cms-extension",
+            "extra": {
+                "typo3/cms": {
+                    "extension-key": "make",
+                    "cms-package-dir": "{$vendor-dir}/typo3/cms",
+                    "web-dir": ".Build/Web"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "B13\\Make\\": "Classes/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "GPL-2.0-or-later"
+            ],
+            "authors": [
+                {
+                    "name": "Oliver Bartsch",
+                    "email": "oliver.bartsch@b13.com"
+                }
+            ],
+            "description": "Kickstarter CLI tool for various TYPO3 functionalities",
+            "homepage": "https://b13.com",
+            "keywords": [
+                "cli",
+                "extensions",
+                "kickstarter",
+                "typo3"
+            ],
+            "support": {
+                "issues": "https://github.com/b13/make/issues",
+                "source": "https://github.com/b13/make/tree/0.1.6"
+            },
+            "time": "2022-07-13T20:31:48+00:00"
+        }
+    ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": [],
+    "stability-flags": {
+        "feliciencorbat/mycocarto": 20
+    },
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": [],
