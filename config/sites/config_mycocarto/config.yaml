@@ -1,0 +1,13 @@
+base: 'https://mycocartotypo.ddev.site:8043/'
+languages:
+  -
+    title: Français
+    enabled: true
+    languageId: 0
+    base: /
+    locale: fr_CH
+    navigationTitle: Français
+    flag: fr
+    websiteTitle: ''
+rootPageId: 1
+websiteTitle: ''
