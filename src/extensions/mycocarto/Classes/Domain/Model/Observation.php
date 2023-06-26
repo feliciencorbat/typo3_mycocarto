@@ -92,7 +92,7 @@ class Observation extends AbstractEntity
     }
 
     /**
-     * @return array
+     * @return ObjectStorage
      */
     public function getTrees(): ObjectStorage
     {
@@ -100,7 +100,8 @@ class Observation extends AbstractEntity
     }
 
     /**
-     * @param array $trees
+     * @param ObjectStorage $trees
+     * @return void
      */
     public function setTrees(ObjectStorage $trees): void
     {
