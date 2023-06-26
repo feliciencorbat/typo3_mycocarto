@@ -14,6 +14,8 @@ return [
             'label' => 'observation',
             'description' => 'Observation',
             'config' => [
+                'type' => 'select',
+                'renderType' => 'selectSingle',
                 'foreign_table' => 'tx_systematic_domain_model_observation',
                 'required' => true,
             ],
@@ -22,6 +24,8 @@ return [
             'label' => 'tree',
             'description' => 'Tree',
             'config' => [
+                'type' => 'select',
+                'renderType' => 'selectSingle',
                 'foreign_table' => 'tx_systematic_domain_model_tree',
                 'required' => true,
             ],

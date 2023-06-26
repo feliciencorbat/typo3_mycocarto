@@ -32,6 +32,8 @@ return [
             'label' => 'Family',
             'description' => 'Family',
             'config' => [
+                'type' => 'select',
+                'renderType' => 'selectSingle',
                 'foreign_table' => 'tx_systematic_domain_model_taxon',
                 'required' => true,
             ],

@@ -23,6 +23,8 @@ return [
             'label' => 'Parent taxon',
             'description' => 'Parent taxon',
             'config' => [
+                'type' => 'select',
+                'renderType' => 'selectSingle',
                 'foreign_table' => 'tx_systematic_domain_model_taxon',
                 'required' => true,
             ],
@@ -32,6 +34,8 @@ return [
             'label' => 'Taxon level',
             'description' => 'Taxon level',
             'config' => [
+                'type' => 'select',
+                'renderType' => 'selectSingle',
                 'foreign_table' => 'tx_systematic_domain_model_taxon_level',
                 'required' => true,
             ],
