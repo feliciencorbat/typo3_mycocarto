@@ -1,0 +1,52 @@
+CREATE TABLE tx_mycocarto_domain_model_ecology
+(
+    name varchar(255) NOT NULL
+);
+
+CREATE TABLE tx_mycocarto_domain_model_tree
+(
+    name varchar(255) NOT NULL,
+    scientific_name varchar(255) NOT NULL
+);
+
+CREATE TABLE tx_mycocarto_domain_model_species
+(
+    genus varchar(255) NOT NULL,
+    species varchar(255) NOT NULL,
+    author varchar(255),
+    family_id int(11) unsigned NOT NULL,
+    KEY index_family (family_id)
+);
+
+CREATE TABLE tx_mycocarto_domain_model_taxon
+(
+    scientificName varchar(255) NOT NULL,
+    parent_taxon_id int(11) unsigned,
+    taxon_level_id int(11) unsigned NOT NULL,
+    KEY index_parent_taxon (parent_taxon_id),
+    KEY index_taxon_level (taxon_level_id)
+);
+
+CREATE TABLE tx_mycocarto_domain_model_taxon_level
+(
+    name varchar(255) NOT NULL
+);
+
+CREATE TABLE tx_mycocarto_domain_model_taxon_observation
+(
+    date date NOT NULL,
+    latitude float,
+    longitude float,
+    ecology_id int(11) unsigned NOT NULL,
+    species_id int(11) unsigned NOT NULL,
+    KEY index_ecology (ecology_id),
+    KEY index_species (species_id)
+);
+
+CREATE TABLE tx_mycocarto_domain_observation_tree
+(
+    observation_id int(11) unsigned NOT NULL,
+    tree_id int(11) unsigned NOT NULL,
+    KEY index_observation (observation_id),
+    KEY index_tree (tree_id)
+);
