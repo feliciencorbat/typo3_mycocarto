@@ -19,8 +19,8 @@ return [
                 'required' => true,
             ],
         ],
-        'scientificName' => [
-            'label' => 'scientific name',
+        'scientific_name' => [
+            'label' => 'scientific_name',
             'config' => [
                 'type' => 'input',
                 'size' => 250,

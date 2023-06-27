@@ -1,0 +1,33 @@
+<html
+        xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
+        data-namespace-typo3-fluid="true">
+
+<f:layout name="Default" />
+
+<f:section name="Content">
+    <h1>Liste des arbres</h1>
+
+    <f:flashMessages />
+
+    <table class="table">
+        <tr>
+            <th>Nom scientifique</th>
+            <th>Nom</th>
+            <th></th>
+            <th></th>
+        </tr>
+        <f:for each="{trees}" as="tree">
+            <tr>
+                <td>{tree.scientificName}</td>
+                <td>{tree.name}</td>
+                <td><f:link.action action="edit" arguments="{tree: tree}" class="btn btn-default">Modifier</f:link.action></td>
+                <td><f:link.action action="delete" arguments="{tree: tree}" class="btn btn-danger">Supprimer</f:link.action></td>
+            </tr>
+        </f:for>
+    </table>
+
+    <f:render partial="Pagination" arguments="{paginator: paginator, pagination: pagination}" />
+
+    <f:link.action action="new" class="btn btn-primary">Nouvel arbre</f:link.action>
+</f:section>
+</html>

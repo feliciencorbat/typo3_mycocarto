@@ -1,6 +1,7 @@
 <?php
 
 use Feliciencorbat\Mycocarto\Controller\EcologyController;
+use Feliciencorbat\Mycocarto\Controller\TreeController;
 
 
 return [
@@ -21,6 +22,21 @@ return [
         'iconIdentifier' => 'tx_mycocarto_logo',
         'controllerActions' => [
             EcologyController::class => [
+                'list', 'new', 'create', 'edit', 'update', 'delete'
+            ],
+        ],
+    ],
+
+    'tx_mycocarto_trees' => [
+        'parent' => 'mycocarto',
+        'access' => 'user',
+        'workspaces' => 'live',
+        'path' => '/module/web/trees',
+        'labels' => ['title' => 'Arbres'],
+        'extensionName' => 'mycocarto',
+        'iconIdentifier' => 'tx_mycocarto_logo',
+        'controllerActions' => [
+            TreeController::class => [
                 'list', 'new', 'create', 'edit', 'update', 'delete'
             ],
         ],

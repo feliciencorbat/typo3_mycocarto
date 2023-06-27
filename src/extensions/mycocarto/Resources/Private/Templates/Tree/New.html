@@ -1,0 +1,19 @@
+<html
+        xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
+        data-namespace-typo3-fluid="true">
+
+<f:layout name="Default" />
+
+<f:section name="Content">
+    <h1>Ajouter un arbre</h1>
+
+    <f:flashMessages />
+
+    <f:render partial="FormErrors" />
+
+    <f:form action="create" name="newTree" object="{newTree}">
+        <f:render partial="Tree/FormFields" />
+        <f:form.submit value="Ajouter" class="btn btn-default"/>
+    </f:form>
+</f:section>
+</html>
