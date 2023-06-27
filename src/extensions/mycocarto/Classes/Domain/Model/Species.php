@@ -1,5 +1,7 @@
 <?php
 
+namespace Feliciencorbat\Mycocarto\Domain\Model;
+
 use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
 
 class Species extends AbstractEntity

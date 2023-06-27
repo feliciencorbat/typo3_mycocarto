@@ -1,5 +1,7 @@
 <?php
 
+namespace Feliciencorbat\Mycocarto\Domain\Model;
+
 use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
 use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
 

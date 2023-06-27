@@ -1,0 +1,31 @@
+<html
+        xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
+        data-namespace-typo3-fluid="true">
+
+<f:layout name="Default" />
+
+<f:section name="Content">
+    <h1>Liste des écologies</h1>
+
+    <f:flashMessages />
+
+    <table class="table">
+        <tr>
+            <th>Nom</th>
+            <th></th>
+            <th></th>
+        </tr>
+        <f:for each="{ecologies}" as="ecology">
+            <tr>
+                <td>{ecology.name}</td>
+                <td><f:link.action action="edit" arguments="{ecology: ecology}" class="btn btn-default">Modifier</f:link.action></td>
+                <td><f:link.action action="delete" arguments="{ecology: ecology}" class="btn btn-danger">Supprimer</f:link.action></td>
+            </tr>
+        </f:for>
+    </table>
+
+    <f:render partial="Pagination" arguments="{paginator: paginator, pagination: pagination}" />
+
+    <f:link.action action="new" class="btn btn-primary">Nouvelle écologie</f:link.action>
+</f:section>
+</html>
