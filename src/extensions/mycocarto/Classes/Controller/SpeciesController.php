@@ -75,35 +75,12 @@ final class SpeciesController extends ActionController
         try {
             $scientificName = $this->request->getArgument('scientificName');
             $species = $this->gbifSpecies->getSpeciesByScientificName($scientificName);
+            $this->speciesWithTaxa->persistCompleteSpecies($species);
+            return $this->redirect('list');
         } catch(JsonException|BadRequestException|RuntimeException|ClientException $e) {
             $this->addFlashMessage($e->getMessage(), 'Erreur', ContextualFeedbackSeverity::ERROR);
             return $this->redirect('new');
         }
-
-        $this->speciesWithTaxa->persistCompleteSpecies($species);
-        return $this->redirect('list');
-    }
-
-    /**
-     * @param Species $species
-     * @return ResponseInterface
-     */
-    public function editAction(Species $species): ResponseInterface
-    {
-        $this->view->assign('species', $species);
-        return $this->htmlResponse();
-    }
-
-    /**
-     * @param Species $species
-     * @return ResponseInterface
-     * @throws IllegalObjectTypeException
-     * @throws UnknownObjectException
-     */
-    public function updateAction(Species $species): ResponseInterface
-    {
-        $this->speciesRepository->update($species);
-        return $this->redirect('list');
     }
 
     /**

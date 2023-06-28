@@ -23,7 +23,7 @@ return [
         'iconIdentifier' => 'tx_mycocarto_logo',
         'controllerActions' => [
             SpeciesController::class => [
-                'list', 'new', 'create', 'edit', 'update', 'delete'
+                'list', 'new', 'create', 'delete'
             ],
         ],
     ],
