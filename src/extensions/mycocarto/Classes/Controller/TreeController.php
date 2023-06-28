@@ -38,7 +38,7 @@ final class TreeController extends ActionController
         $allTrees = $this->treeRepository->findAll();
         $paginator = new QueryResultPaginator($allTrees, $currentPageNumber, $itemsPerPage);
         $pagination = new SimplePagination($paginator);
-        $paginatedTrees = $this->treeRepository->findPaginatedTrees($itemsPerPage, $currentPageNumber);
+        $paginatedTrees = $this->treeRepository->findPaginatedObjects($itemsPerPage, $currentPageNumber, ['scientificName']);
 
         $this->view->assignMultiple([
             'paginator' => $paginator,

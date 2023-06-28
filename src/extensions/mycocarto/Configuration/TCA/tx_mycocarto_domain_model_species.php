@@ -28,8 +28,17 @@ return [
                 'required' => true,
             ],
         ],
-        'family_id' => [
-            'label' => 'Family',
+        'author' => [
+            'label' => 'author',
+            'config' => [
+                'type' => 'input',
+                'size' => 250,
+                'eval' => 'trim',
+                'required' => true,
+            ],
+        ],
+        'family' => [
+            'label' => 'family',
             'description' => 'Family',
             'config' => [
                 'type' => 'select',

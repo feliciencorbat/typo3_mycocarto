@@ -8,16 +8,5 @@ use TYPO3\CMS\Extbase\Persistence\Repository;
 
 class TreeRepository extends Repository
 {
-    public function findPaginatedTrees(int $limit, int $page): QueryResultInterface
-    {
-        $query = $this->createQuery();
-        $query->setOrderings(
-            array(
-                'scientificName' => QueryInterface::ORDER_ASCENDING,
-            )
-        );
-        $query->setLimit($limit);
-        $query->setOffset(($page-1) * $limit);
-        return $query->execute();
-    }
+    use PaginationTrait;
 }

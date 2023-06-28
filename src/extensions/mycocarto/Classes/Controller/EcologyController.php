@@ -38,7 +38,7 @@ final class EcologyController extends ActionController
         $allEcologies = $this->ecologyRepository->findAll();
         $paginator = new QueryResultPaginator($allEcologies, $currentPageNumber, $itemsPerPage);
         $pagination = new SimplePagination($paginator);
-        $paginatedEcologies = $this->ecologyRepository->findPaginatedEcologies($itemsPerPage, $currentPageNumber);
+        $paginatedEcologies = $this->ecologyRepository->findPaginatedObjects($itemsPerPage, $currentPageNumber, ['name']);
 
         $this->view->assignMultiple([
             'paginator' => $paginator,

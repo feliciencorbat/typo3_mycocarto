@@ -14,20 +14,20 @@ CREATE TABLE tx_mycocarto_domain_model_species
     genus varchar(255) NOT NULL,
     species varchar(255) NOT NULL,
     author varchar(255),
-    family_id int(11) unsigned NOT NULL,
-    KEY index_family (family_id)
+    family int(11) unsigned NOT NULL,
+    KEY index_family (family)
 );
 
 CREATE TABLE tx_mycocarto_domain_model_taxon
 (
-    scientificName varchar(255) NOT NULL,
-    parent_taxon_id int(11) unsigned,
-    taxon_level_id int(11) unsigned NOT NULL,
-    KEY index_parent_taxon (parent_taxon_id),
-    KEY index_taxon_level (taxon_level_id)
+    scientific_name varchar(255) NOT NULL,
+    parent_taxon int(11) unsigned,
+    taxon_level int(11) unsigned NOT NULL,
+    KEY index_parent_taxon (parent_taxon),
+    KEY index_taxon_level (taxon_level)
 );
 
-CREATE TABLE tx_mycocarto_domain_model_taxon_level
+CREATE TABLE tx_mycocarto_domain_model_taxonlevel
 (
     name varchar(255) NOT NULL
 );

@@ -2,8 +2,8 @@
 
 return [
     'ctrl' => [
-        'title' => 'Taxon level',
-        'label' => 'taxon level',
+        'title' => 'taxonlevel',
+        'label' => 'taxonlevel',
         'tstamp' => 'tstamp',
         'crdate' => 'crdate',
         'delete' => 'deleted',
