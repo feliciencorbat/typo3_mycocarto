@@ -75,6 +75,11 @@ final class GbifSpecies
         }
         $stdObjectSpecies = $stdObjectSpeciesList[0];
 
+        // test if kingdom is Fungi
+        if ($stdObjectSpecies->kingdom != "Fungi") {
+            throw new BadRequestException("Le taxon avec le nom $scientificName n'est pas un champignon.", 404);
+        }
+
         // test if taxon rank is species
         if ($stdObjectSpecies->rank != "SPECIES") {
             throw new BadRequestException("Le taxon avec le nom $scientificName n'est pas une espèce.", 404);
