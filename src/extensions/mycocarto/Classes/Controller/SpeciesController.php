@@ -12,17 +12,15 @@ use JsonException;
 use Psr\Http\Message\ResponseInterface;
 use TYPO3\CMS\Backend\Attribute\Controller;
 use TYPO3\CMS\Core\Error\Http\BadRequestException;
-use TYPO3\CMS\Core\Pagination\SimplePagination;
 use TYPO3\CMS\Core\Type\ContextualFeedbackSeverity;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
-use TYPO3\CMS\Extbase\Pagination\QueryResultPaginator;
 use TYPO3\CMS\Extbase\Persistence\Exception\IllegalObjectTypeException;
-use TYPO3\CMS\Extbase\Persistence\Exception\UnknownObjectException;
-use TYPO3\CMS\Extbase\Persistence\Generic\Storage\Exception\SqlErrorException;
 
 #[Controller]
 final class SpeciesController extends ActionController
 {
+    use PaginationTrait;
+
     const NB_SPECIES_PER_PAGE = 10;
 
     public function __construct(
@@ -40,19 +38,14 @@ final class SpeciesController extends ActionController
     public function listAction(): ResponseInterface
     {
         $itemsPerPage = SpeciesController::NB_SPECIES_PER_PAGE;
-        $currentPageNumber = 1;
-        if ($this->request->hasArgument('page')) {
-            $currentPageNumber = (int)$this->request->getArgument('page');
-        }
-
         $allSpecies = $this->speciesRepository->findAll();
-        $paginator = new QueryResultPaginator($allSpecies, $currentPageNumber, $itemsPerPage);
-        $pagination = new SimplePagination($paginator);
-        $paginatedSpecies = $this->speciesRepository->findPaginatedObjects($itemsPerPage, $currentPageNumber, ['genus', 'species']);
+        $paginationInfos = $this->paginateObjectsList($itemsPerPage, $this->request, $allSpecies);
+
+        $paginatedSpecies = $this->speciesRepository->findPaginatedObjects($itemsPerPage, $paginationInfos[2], ['genus', 'species']);
 
         $this->view->assignMultiple([
-            'paginator' => $paginator,
-            'pagination' => $pagination,
+            'paginator' => $paginationInfos[0],
+            'pagination' => $paginationInfos[1],
             'speciesList' => $paginatedSpecies
         ]);
         return $this->htmlResponse();

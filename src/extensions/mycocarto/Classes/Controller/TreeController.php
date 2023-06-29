@@ -15,6 +15,8 @@ use TYPO3\CMS\Extbase\Persistence\Exception\UnknownObjectException;
 #[Controller]
 final class TreeController extends ActionController
 {
+    use PaginationTrait;
+
     const NB_TREES_PER_PAGE = 10;
 
     public function __construct(
@@ -30,19 +32,14 @@ final class TreeController extends ActionController
     public function listAction(): ResponseInterface
     {
         $itemsPerPage = TreeController::NB_TREES_PER_PAGE;
-        $currentPageNumber = 1;
-        if ($this->request->hasArgument('page')) {
-            $currentPageNumber = (int)$this->request->getArgument('page');
-        }
-
         $allTrees = $this->treeRepository->findAll();
-        $paginator = new QueryResultPaginator($allTrees, $currentPageNumber, $itemsPerPage);
-        $pagination = new SimplePagination($paginator);
-        $paginatedTrees = $this->treeRepository->findPaginatedObjects($itemsPerPage, $currentPageNumber, ['scientificName']);
+        $paginationInfos = $this->paginateObjectsList($itemsPerPage, $this->request, $allTrees);
+
+        $paginatedTrees = $this->treeRepository->findPaginatedObjects($itemsPerPage, $paginationInfos[2], ['scientificName']);
 
         $this->view->assignMultiple([
-            'paginator' => $paginator,
-            'pagination' => $pagination,
+            'paginator' => $paginationInfos[0],
+            'pagination' => $paginationInfos[1],
             'trees' => $paginatedTrees
         ]);
         return $this->htmlResponse();

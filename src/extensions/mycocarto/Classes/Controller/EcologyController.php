@@ -6,15 +6,15 @@ use Feliciencorbat\Mycocarto\Domain\Model\Ecology;
 use Feliciencorbat\Mycocarto\Domain\Repository\EcologyRepository;
 use Psr\Http\Message\ResponseInterface;
 use TYPO3\CMS\Backend\Attribute\Controller;
-use TYPO3\CMS\Core\Pagination\SimplePagination;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
-use TYPO3\CMS\Extbase\Pagination\QueryResultPaginator;
 use TYPO3\CMS\Extbase\Persistence\Exception\IllegalObjectTypeException;
 use TYPO3\CMS\Extbase\Persistence\Exception\UnknownObjectException;
 
 #[Controller]
 final class EcologyController extends ActionController
 {
+    use PaginationTrait;
+
     const NB_ECOLOGIES_PER_PAGE = 10;
 
     public function __construct(
@@ -30,19 +30,14 @@ final class EcologyController extends ActionController
     public function listAction(): ResponseInterface
     {
         $itemsPerPage = EcologyController::NB_ECOLOGIES_PER_PAGE;
-        $currentPageNumber = 1;
-        if ($this->request->hasArgument('page')) {
-            $currentPageNumber = (int)$this->request->getArgument('page');
-        }
-
         $allEcologies = $this->ecologyRepository->findAll();
-        $paginator = new QueryResultPaginator($allEcologies, $currentPageNumber, $itemsPerPage);
-        $pagination = new SimplePagination($paginator);
-        $paginatedEcologies = $this->ecologyRepository->findPaginatedObjects($itemsPerPage, $currentPageNumber, ['name']);
+        $paginationInfos = $this->paginateObjectsList($itemsPerPage, $this->request, $allEcologies);
+
+        $paginatedEcologies = $this->ecologyRepository->findPaginatedObjects($itemsPerPage, $paginationInfos[2], ['name']);
 
         $this->view->assignMultiple([
-            'paginator' => $paginator,
-            'pagination' => $pagination,
+            'paginator' => $paginationInfos[0],
+            'pagination' => $paginationInfos[1],
             'ecologies' => $paginatedEcologies
         ]);
         return $this->htmlResponse();
