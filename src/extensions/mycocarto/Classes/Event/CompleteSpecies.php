@@ -25,14 +25,4 @@ final class CompleteSpecies
         $this->mutableProperty = $mutableProperty;
     }
 
-    /**
-     * @return int
-     */
-    public function getImmutableProperty(): int
-    {
-        return $this->immutableProperty;
-    }
-
-
-
 }

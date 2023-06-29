@@ -75,7 +75,6 @@ class SpeciesWithTaxa
 
         $taxonFound = $this->taxonRepository->findOneBy(['scientificName' => $taxon->getScientificName()]);
         if (empty($taxonFound)) {
-            $exists = false;
             $taxon->setTaxonLevel($taxonLevel);
             $this->taxonRepository->add($taxon);
             $this->persistenceManager->persistAll();
