@@ -7,9 +7,3 @@ services:
   Feliciencorbat\Mycocarto\:
     resource: '../Classes/*'
     exclude: '../Classes/Domain/Model/*'
-
-  Feliciencorbat\Mycocarto\Domain\Repository\EcologyRepository:
-    public: true
-
-  Feliciencorbat\Mycocarto\Domain\Repository\TreeRepository:
-    public: true
