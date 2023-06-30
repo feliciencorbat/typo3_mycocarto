@@ -10,7 +10,8 @@ return [
         'labels' => ['title' => 'MycoCarto'],
         'position' => ['after' => 'web'],
         'iconIdentifier' => 'tx_mycocarto_logo',
-        'navigationComponent' => 'TYPO3/CMS/Backend/PageTree/PageTreeElement',
+        'extensionName' => 'Mycocarto',
+        'navigationComponent' => '',
     ],
 
     'species' => [
@@ -19,7 +20,7 @@ return [
         'workspaces' => 'live',
         'path' => '/module/web/species',
         'labels' => ['title' => 'Espèces'],
-        'extensionName' => 'mycocarto',
+        'extensionName' => 'Mycocarto',
         'iconIdentifier' => 'tx_mycocarto_logo',
         'controllerActions' => [
             SpeciesController::class => [
@@ -34,7 +35,7 @@ return [
         'workspaces' => 'live',
         'path' => '/module/web/ecologies',
         'labels' => ['title' => 'Ecologies'],
-        'extensionName' => 'mycocarto',
+        'extensionName' => 'Mycocarto',
         'iconIdentifier' => 'tx_mycocarto_logo',
         'controllerActions' => [
             EcologyController::class => [
@@ -49,7 +50,7 @@ return [
         'workspaces' => 'live',
         'path' => '/module/web/trees',
         'labels' => ['title' => 'Arbres'],
-        'extensionName' => 'mycocarto',
+        'extensionName' => 'Mycocarto',
         'iconIdentifier' => 'tx_mycocarto_logo',
         'controllerActions' => [
             TreeController::class => [

@@ -77,4 +77,9 @@ class Species extends AbstractEntity
     {
         $this->family = $family;
     }
+
+    public function getCanonicalName(): string
+    {
+        return $this->genus . " " . $this->species;
+    }
 }

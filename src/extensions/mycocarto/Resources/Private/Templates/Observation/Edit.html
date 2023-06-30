@@ -1,0 +1,19 @@
+<html
+    xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
+    data-namespace-typo3-fluid="true">
+
+<f:layout name="Default" />
+
+<f:section name="Content">
+    <h1>Modifier l'observation</h1>
+
+    <f:flashMessages />
+
+    <f:render partial="FormErrors" />
+
+    <f:form action="update" name="observation" object="{observation}">
+        <f:render partial="Observation/FormFields"  arguments="{observation: observation, speciesList: speciesList, ecologies: ecologies}" />
+        <f:form.submit value="Mettre à jour" class="btn btn-default" />
+    </f:form>
+</f:section>
+</html>

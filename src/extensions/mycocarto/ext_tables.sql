@@ -32,11 +32,11 @@ CREATE TABLE tx_mycocarto_domain_model_taxonlevel
     name varchar(255) NOT NULL
 );
 
-CREATE TABLE tx_mycocarto_domain_model_taxon_observation
+CREATE TABLE tx_mycocarto_domain_model_observation
 (
-    date date NOT NULL,
-    latitude float,
-    longitude float,
+    date int(10) NOT NULL,
+    latitude float NOT NULL,
+    longitude float NOT NULL,
     ecology int(11) unsigned NOT NULL,
     species int(11) unsigned NOT NULL,
     KEY index_ecology (ecology),

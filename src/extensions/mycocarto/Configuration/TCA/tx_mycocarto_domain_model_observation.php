@@ -13,10 +13,10 @@ return [
         'date' => [
             'label' => 'date',
             'config' => [
-                'type' => 'input',
-                'size' => 250,
-                'eval' => 'trim',
-                'required' => true,
+                'type' => 'datetime',
+                'format' => 'date',
+                'eval' => 'int',
+                'default' => 0,
             ],
         ],
         'latitude' => [
@@ -37,24 +37,32 @@ return [
                 'required' => true,
             ],
         ],
-        'ecology_id' => [
+        'ecology' => [
+            'exclude' => false,
             'label' => 'ecology',
             'description' => 'Ecology',
             'config' => [
                 'type' => 'select',
                 'renderType' => 'selectSingle',
-                'foreign_table' => 'tx_systematic_domain_model_ecology',
+                'foreign_table' => 'tx_mycocarto_domain_model_ecology',
                 'required' => true,
+                'default' => 0,
+                'minitems' => 1,
+                'maxitems' => 1,
             ],
         ],
-        'species_id' => [
+        'species' => [
+            'exclude' => false,
             'label' => 'species',
             'description' => 'Species',
             'config' => [
                 'type' => 'select',
                 'renderType' => 'selectSingle',
-                'foreign_table' => 'tx_systematic_domain_model_species',
+                'foreign_table' => 'tx_mycocarto_domain_model_species',
                 'required' => true,
+                'default' => 0,
+                'minitems' => 1,
+                'maxitems' => 1,
             ],
         ],
     ],
