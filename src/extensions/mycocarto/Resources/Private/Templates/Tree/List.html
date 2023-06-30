@@ -18,16 +18,17 @@
         </tr>
         <f:for each="{trees}" as="tree">
             <tr>
-                <td>{tree.scientificName}</td>
+                <td class="fst-italic">{tree.scientificName}</td>
                 <td>{tree.name}</td>
                 <td><f:link.action action="edit" arguments="{tree: tree}" class="btn btn-default">Modifier</f:link.action></td>
                 <td><f:link.action action="delete" arguments="{tree: tree}" class="btn btn-danger">Supprimer</f:link.action></td>
             </tr>
         </f:for>
     </table>
+    <f:if condition="{paginator.NumberOfPages} > 1">
+        <f:render partial="Pagination" arguments="{paginator: paginator, pagination: pagination}" />
+    </f:if>
 
-    <f:render partial="Pagination" arguments="{paginator: paginator, pagination: pagination}" />
-
-    <f:link.action action="new" class="btn btn-primary">Nouvel arbre</f:link.action>
+    <f:link.action action="new" class="btn btn-primary mt-4">Nouvel arbre</f:link.action>
 </f:section>
 </html>

@@ -6,15 +6,15 @@ use Feliciencorbat\Mycocarto\Controller\TreeController;
 
 
 return [
-    'mycocarto' => [
+    'module' => [
         'labels' => ['title' => 'MycoCarto'],
         'position' => ['after' => 'web'],
         'iconIdentifier' => 'tx_mycocarto_logo',
         'navigationComponent' => 'TYPO3/CMS/Backend/PageTree/PageTreeElement',
     ],
 
-    'tx_mycocarto_species' => [
-        'parent' => 'mycocarto',
+    'species' => [
+        'parent' => 'module',
         'access' => 'user',
         'workspaces' => 'live',
         'path' => '/module/web/species',
@@ -28,8 +28,8 @@ return [
         ],
     ],
 
-    'tx_mycocarto_ecologies' => [
-        'parent' => 'mycocarto',
+    'ecologies' => [
+        'parent' => 'module',
         'access' => 'user',
         'workspaces' => 'live',
         'path' => '/module/web/ecologies',
@@ -43,8 +43,8 @@ return [
         ],
     ],
 
-    'tx_mycocarto_trees' => [
-        'parent' => 'mycocarto',
+    'trees' => [
+        'parent' => 'module',
         'access' => 'user',
         'workspaces' => 'live',
         'path' => '/module/web/trees',

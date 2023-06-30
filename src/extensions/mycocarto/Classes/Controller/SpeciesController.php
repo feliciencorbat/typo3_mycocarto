@@ -11,6 +11,7 @@ use http\Exception\RuntimeException;
 use JsonException;
 use Psr\Http\Message\ResponseInterface;
 use TYPO3\CMS\Backend\Attribute\Controller;
+use TYPO3\CMS\Backend\Template\ModuleTemplateFactory;
 use TYPO3\CMS\Core\Error\Http\BadRequestException;
 use TYPO3\CMS\Core\Type\ContextualFeedbackSeverity;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
@@ -26,7 +27,8 @@ final class SpeciesController extends ActionController
     public function __construct(
         protected readonly SpeciesRepository $speciesRepository,
         protected readonly GbifSpecies $gbifSpecies,
-        protected readonly SpeciesWithTaxa $speciesWithTaxa
+        protected readonly SpeciesWithTaxa $speciesWithTaxa,
+        protected readonly ModuleTemplateFactory $moduleTemplateFactory,
     )
     {
     }
@@ -48,7 +50,9 @@ final class SpeciesController extends ActionController
             'pagination' => $paginationInfos[1],
             'speciesList' => $paginatedSpecies
         ]);
-        return $this->htmlResponse();
+        $moduleTemplate = $this->moduleTemplateFactory->create($this->request);
+        $moduleTemplate->setContent($this->view->render());
+        return $this->htmlResponse($moduleTemplate->renderContent());
     }
 
     /**
@@ -56,7 +60,9 @@ final class SpeciesController extends ActionController
      */
     public function newAction(): ResponseInterface
     {
-        return $this->htmlResponse();
+        $moduleTemplate = $this->moduleTemplateFactory->create($this->request);
+        $moduleTemplate->setContent($this->view->render());
+        return $this->htmlResponse($moduleTemplate->renderContent());
     }
 
     /**

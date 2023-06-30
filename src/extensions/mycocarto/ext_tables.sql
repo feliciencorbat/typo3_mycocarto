@@ -37,16 +37,16 @@ CREATE TABLE tx_mycocarto_domain_model_taxon_observation
     date date NOT NULL,
     latitude float,
     longitude float,
-    ecology_id int(11) unsigned NOT NULL,
-    species_id int(11) unsigned NOT NULL,
-    KEY index_ecology (ecology_id),
-    KEY index_species (species_id)
+    ecology int(11) unsigned NOT NULL,
+    species int(11) unsigned NOT NULL,
+    KEY index_ecology (ecology),
+    KEY index_species (species)
 );
 
 CREATE TABLE tx_mycocarto_domain_observation_tree
 (
-    observation_id int(11) unsigned NOT NULL,
-    tree_id int(11) unsigned NOT NULL,
-    KEY index_observation (observation_id),
-    KEY index_tree (tree_id)
+    observation int(11) unsigned NOT NULL,
+    tree int(11) unsigned NOT NULL,
+    KEY index_observation (observation),
+    KEY index_tree (tree)
 );

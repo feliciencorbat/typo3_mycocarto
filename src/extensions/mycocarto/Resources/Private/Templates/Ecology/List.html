@@ -24,8 +24,10 @@
         </f:for>
     </table>
 
-    <f:render partial="Pagination" arguments="{paginator: paginator, pagination: pagination}" />
+    <f:if condition="{paginator.NumberOfPages} > 1">
+        <f:render partial="Pagination" arguments="{paginator: paginator, pagination: pagination}" />
+    </f:if>
 
-    <f:link.action action="new" class="btn btn-primary">Nouvelle écologie</f:link.action>
+    <f:link.action action="new" class="btn btn-primary mt-4">Nouvelle écologie</f:link.action>
 </f:section>
 </html>

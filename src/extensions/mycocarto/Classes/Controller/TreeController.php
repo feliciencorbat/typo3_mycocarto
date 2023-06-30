@@ -6,6 +6,7 @@ use Feliciencorbat\Mycocarto\Domain\Model\Tree;
 use Feliciencorbat\Mycocarto\Domain\Repository\TreeRepository;
 use Psr\Http\Message\ResponseInterface;
 use TYPO3\CMS\Backend\Attribute\Controller;
+use TYPO3\CMS\Backend\Template\ModuleTemplateFactory;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
 use TYPO3\CMS\Extbase\Persistence\Exception\IllegalObjectTypeException;
 use TYPO3\CMS\Extbase\Persistence\Exception\UnknownObjectException;
@@ -19,6 +20,7 @@ final class TreeController extends ActionController
 
     public function __construct(
         protected readonly TreeRepository $treeRepository,
+        protected readonly ModuleTemplateFactory $moduleTemplateFactory,
     )
     {
     }
@@ -40,7 +42,9 @@ final class TreeController extends ActionController
             'pagination' => $paginationInfos[1],
             'trees' => $paginatedTrees
         ]);
-        return $this->htmlResponse();
+        $moduleTemplate = $this->moduleTemplateFactory->create($this->request);
+        $moduleTemplate->setContent($this->view->render());
+        return $this->htmlResponse($moduleTemplate->renderContent());
     }
 
     /**
@@ -48,7 +52,9 @@ final class TreeController extends ActionController
      */
     public function newAction(): ResponseInterface
     {
-        return $this->htmlResponse();
+        $moduleTemplate = $this->moduleTemplateFactory->create($this->request);
+        $moduleTemplate->setContent($this->view->render());
+        return $this->htmlResponse($moduleTemplate->renderContent());
     }
 
     /**
@@ -67,7 +73,9 @@ final class TreeController extends ActionController
     public function editAction(Tree $tree): ResponseInterface
     {
         $this->view->assign('tree', $tree);
-        return $this->htmlResponse();
+        $moduleTemplate = $this->moduleTemplateFactory->create($this->request);
+        $moduleTemplate->setContent($this->view->render());
+        return $this->htmlResponse($moduleTemplate->renderContent());
     }
 
     /**
