@@ -2,12 +2,27 @@
 
 namespace Feliciencorbat\Mycocarto\Domain\Model;
 
+use TYPO3\CMS\Extbase\Annotation\Validate;
 use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
 
 class Tree extends AbstractEntity
 {
+    #[Validate([
+        'validator' => 'StringLength',
+        'options' => ['minimum' => 3, 'maximum' => 150],
+    ])]
+    #[Validate([
+        'validator' => 'NotEmpty'
+    ])]
     protected string $name;
 
+    #[Validate([
+        'validator' => 'StringLength',
+        'options' => ['minimum' => 3, 'maximum' => 150],
+    ])]
+    #[Validate([
+        'validator' => 'NotEmpty'
+    ])]
     protected string $scientificName;
 
     /**
@@ -40,5 +55,10 @@ class Tree extends AbstractEntity
     public function setScientificName(string $scientificName): void
     {
         $this->scientificName = $scientificName;
+    }
+
+    public function getCompleteName(): string
+    {
+        return $this->scientificName . " - " . $this->name;
     }
 }

@@ -2,6 +2,7 @@
 
 namespace Feliciencorbat\Mycocarto\Controller;
 
+use Error;
 use Exception;
 use Feliciencorbat\Mycocarto\Domain\Model\Ecology;
 use Feliciencorbat\Mycocarto\Domain\Repository\EcologyRepository;
@@ -10,7 +11,10 @@ use Psr\Http\Message\ResponseInterface;
 use TYPO3\CMS\Backend\Attribute\Controller;
 use TYPO3\CMS\Backend\Template\ModuleTemplateFactory;
 use TYPO3\CMS\Core\Type\ContextualFeedbackSeverity;
+use TYPO3\CMS\Extbase\Annotation\IgnoreValidation;
+use TYPO3\CMS\Extbase\Annotation\Validate;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
+use TYPO3\CMS\Extbase\Mvc\Exception\InfiniteLoopException;
 use TYPO3\CMS\Extbase\Persistence\Exception\IllegalObjectTypeException;
 use TYPO3\CMS\Extbase\Persistence\Exception\UnknownObjectException;
 
@@ -53,6 +57,7 @@ final class EcologyController extends ActionController
     /**
      * @return ResponseInterface
      */
+    #[IgnoreValidation(['argumentName' => 'newEcology'])]
     public function newAction(): ResponseInterface
     {
         $moduleTemplate = $this->moduleTemplateFactory->create($this->request);
@@ -72,6 +77,7 @@ final class EcologyController extends ActionController
      * @param Ecology $ecology
      * @return ResponseInterface
      */
+    #[IgnoreValidation(['argumentName' => 'ecology'])]
     public function editAction(Ecology $ecology): ResponseInterface
     {
         $moduleTemplate = $this->moduleTemplateFactory->create($this->request);

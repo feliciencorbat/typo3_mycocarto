@@ -7,6 +7,7 @@ use Feliciencorbat\Mycocarto\Domain\Repository\TreeRepository;
 use Psr\Http\Message\ResponseInterface;
 use TYPO3\CMS\Backend\Attribute\Controller;
 use TYPO3\CMS\Backend\Template\ModuleTemplateFactory;
+use TYPO3\CMS\Extbase\Annotation\IgnoreValidation;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
 use TYPO3\CMS\Extbase\Persistence\Exception\IllegalObjectTypeException;
 use TYPO3\CMS\Extbase\Persistence\Exception\UnknownObjectException;
@@ -49,6 +50,7 @@ final class TreeController extends ActionController
     /**
      * @return ResponseInterface
      */
+    #[IgnoreValidation(['argumentName' => 'newTree'])]
     public function newAction(): ResponseInterface
     {
         $moduleTemplate = $this->moduleTemplateFactory->create($this->request);
@@ -68,6 +70,7 @@ final class TreeController extends ActionController
      * @param Tree $tree
      * @return ResponseInterface
      */
+    #[IgnoreValidation(['argumentName' => 'tree'])]
     public function editAction(Tree $tree): ResponseInterface
     {
         $moduleTemplate = $this->moduleTemplateFactory->create($this->request);
