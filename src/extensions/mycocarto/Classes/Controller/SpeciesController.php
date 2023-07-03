@@ -2,7 +2,9 @@
 
 namespace Feliciencorbat\Mycocarto\Controller;
 
+use Exception;
 use Feliciencorbat\Mycocarto\Domain\Model\Species;
+use Feliciencorbat\Mycocarto\Domain\Repository\ObservationRepository;
 use Feliciencorbat\Mycocarto\Domain\Repository\SpeciesRepository;
 use Feliciencorbat\Mycocarto\Http\GbifSpecies;
 use Feliciencorbat\Mycocarto\Service\SpeciesWithTaxa;
@@ -26,6 +28,7 @@ final class SpeciesController extends ActionController
 
     public function __construct(
         protected readonly SpeciesRepository $speciesRepository,
+        protected readonly ObservationRepository $observationRepository,
         protected readonly GbifSpecies $gbifSpecies,
         protected readonly SpeciesWithTaxa $speciesWithTaxa,
         protected readonly ModuleTemplateFactory $moduleTemplateFactory,
@@ -83,11 +86,16 @@ final class SpeciesController extends ActionController
     /**
      * @param Species $species
      * @return ResponseInterface
-     * @throws IllegalObjectTypeException
      */
     public function deleteAction(Species $species): ResponseInterface
     {
-        $this->speciesRepository->remove($species);
-        return $this->redirect('list');
+        try {
+            $this->observationRepository->testIfSpeciesExistsInObservation($species);
+            $this->speciesRepository->remove($species);
+        } catch(Exception $e) {
+            $this->addFlashMessage($e->getMessage(),'Erreur', ContextualFeedbackSeverity::ERROR);
+        } finally {
+            return $this->redirect('list');
+        }
     }
 }

@@ -2,11 +2,14 @@
 
 namespace Feliciencorbat\Mycocarto\Controller;
 
+use Exception;
 use Feliciencorbat\Mycocarto\Domain\Model\Ecology;
 use Feliciencorbat\Mycocarto\Domain\Repository\EcologyRepository;
+use Feliciencorbat\Mycocarto\Domain\Repository\ObservationRepository;
 use Psr\Http\Message\ResponseInterface;
 use TYPO3\CMS\Backend\Attribute\Controller;
 use TYPO3\CMS\Backend\Template\ModuleTemplateFactory;
+use TYPO3\CMS\Core\Type\ContextualFeedbackSeverity;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
 use TYPO3\CMS\Extbase\Persistence\Exception\IllegalObjectTypeException;
 use TYPO3\CMS\Extbase\Persistence\Exception\UnknownObjectException;
@@ -20,6 +23,7 @@ final class EcologyController extends ActionController
 
     public function __construct(
         protected readonly EcologyRepository $ecologyRepository,
+        protected readonly ObservationRepository $observationRepository,
         protected readonly ModuleTemplateFactory $moduleTemplateFactory,
     )
     {
@@ -90,11 +94,16 @@ final class EcologyController extends ActionController
     /**
      * @param Ecology $ecology
      * @return ResponseInterface
-     * @throws IllegalObjectTypeException
      */
     public function deleteAction(Ecology $ecology): ResponseInterface
     {
-        $this->ecologyRepository->remove($ecology);
-        return $this->redirect('list');
+        try {
+            $this->observationRepository->testIfEcologyExistsInObservation($ecology);
+            $this->ecologyRepository->remove($ecology);
+        } catch(Exception $e) {
+            $this->addFlashMessage($e->getMessage(),'Erreur', ContextualFeedbackSeverity::ERROR);
+        } finally {
+            return $this->redirect('list');
+        }
     }
 }
