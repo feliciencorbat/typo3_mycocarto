@@ -37,14 +37,13 @@ final class EcologyController extends ActionController
 
         $paginatedEcologies = $this->ecologyRepository->findPaginatedObjects($itemsPerPage, $paginationInfos[2], ['name']);
 
-        $this->view->assignMultiple([
+        $moduleTemplate = $this->moduleTemplateFactory->create($this->request);
+        $moduleTemplate->assignMultiple([
             'paginator' => $paginationInfos[0],
             'pagination' => $paginationInfos[1],
             'ecologies' => $paginatedEcologies
         ]);
-        $moduleTemplate = $this->moduleTemplateFactory->create($this->request);
-        $moduleTemplate->setContent($this->view->render());
-        return $this->htmlResponse($moduleTemplate->renderContent());
+        return $moduleTemplate->renderResponse();
     }
 
     /**
@@ -53,8 +52,7 @@ final class EcologyController extends ActionController
     public function newAction(): ResponseInterface
     {
         $moduleTemplate = $this->moduleTemplateFactory->create($this->request);
-        $moduleTemplate->setContent($this->view->render());
-        return $this->htmlResponse($moduleTemplate->renderContent());
+        return $moduleTemplate->renderResponse();
     }
 
     /**
@@ -72,10 +70,9 @@ final class EcologyController extends ActionController
      */
     public function editAction(Ecology $ecology): ResponseInterface
     {
-        $this->view->assign('ecology', $ecology);
         $moduleTemplate = $this->moduleTemplateFactory->create($this->request);
-        $moduleTemplate->setContent($this->view->render());
-        return $this->htmlResponse($moduleTemplate->renderContent());
+        $moduleTemplate->assign('ecology', $ecology);
+        return $moduleTemplate->renderResponse();
     }
 
     /**

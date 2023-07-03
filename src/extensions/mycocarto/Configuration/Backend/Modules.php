@@ -11,7 +11,6 @@ return [
         'position' => ['after' => 'web'],
         'iconIdentifier' => 'tx_mycocarto_logo',
         'extensionName' => 'Mycocarto',
-        'navigationComponent' => '',
     ],
 
     'species' => [

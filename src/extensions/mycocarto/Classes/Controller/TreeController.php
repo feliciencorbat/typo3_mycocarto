@@ -37,14 +37,13 @@ final class TreeController extends ActionController
 
         $paginatedTrees = $this->treeRepository->findPaginatedObjects($itemsPerPage, $paginationInfos[2], ['scientificName']);
 
-        $this->view->assignMultiple([
+        $moduleTemplate = $this->moduleTemplateFactory->create($this->request);
+        $moduleTemplate->assignMultiple([
             'paginator' => $paginationInfos[0],
             'pagination' => $paginationInfos[1],
             'trees' => $paginatedTrees
         ]);
-        $moduleTemplate = $this->moduleTemplateFactory->create($this->request);
-        $moduleTemplate->setContent($this->view->render());
-        return $this->htmlResponse($moduleTemplate->renderContent());
+        return $moduleTemplate->renderResponse();
     }
 
     /**
@@ -53,8 +52,7 @@ final class TreeController extends ActionController
     public function newAction(): ResponseInterface
     {
         $moduleTemplate = $this->moduleTemplateFactory->create($this->request);
-        $moduleTemplate->setContent($this->view->render());
-        return $this->htmlResponse($moduleTemplate->renderContent());
+        return $moduleTemplate->renderResponse();
     }
 
     /**
@@ -72,10 +70,9 @@ final class TreeController extends ActionController
      */
     public function editAction(Tree $tree): ResponseInterface
     {
-        $this->view->assign('tree', $tree);
         $moduleTemplate = $this->moduleTemplateFactory->create($this->request);
-        $moduleTemplate->setContent($this->view->render());
-        return $this->htmlResponse($moduleTemplate->renderContent());
+        $moduleTemplate->assign('tree', $tree);
+        return $moduleTemplate->renderResponse();
     }
 
     /**

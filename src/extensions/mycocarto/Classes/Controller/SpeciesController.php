@@ -45,14 +45,13 @@ final class SpeciesController extends ActionController
 
         $paginatedSpecies = $this->speciesRepository->findPaginatedObjects($itemsPerPage, $paginationInfos[2], ['genus', 'species']);
 
-        $this->view->assignMultiple([
+        $moduleTemplate = $this->moduleTemplateFactory->create($this->request);
+        $moduleTemplate->assignMultiple([
             'paginator' => $paginationInfos[0],
             'pagination' => $paginationInfos[1],
             'speciesList' => $paginatedSpecies
         ]);
-        $moduleTemplate = $this->moduleTemplateFactory->create($this->request);
-        $moduleTemplate->setContent($this->view->render());
-        return $this->htmlResponse($moduleTemplate->renderContent());
+        return $moduleTemplate->renderResponse();
     }
 
     /**
@@ -61,8 +60,7 @@ final class SpeciesController extends ActionController
     public function newAction(): ResponseInterface
     {
         $moduleTemplate = $this->moduleTemplateFactory->create($this->request);
-        $moduleTemplate->setContent($this->view->render());
-        return $this->htmlResponse($moduleTemplate->renderContent());
+        return $moduleTemplate->renderResponse();
     }
 
     /**
