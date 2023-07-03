@@ -2,14 +2,25 @@
 
 namespace Feliciencorbat\Mycocarto\Domain\Model;
 
+use TYPO3\CMS\Extbase\Annotation\Validate;
 use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
 
 class Taxon extends AbstractEntity
 {
+    #[Validate([
+        'validator' => 'StringLength',
+        'options' => ['minimum' => 3, 'maximum' => 150],
+    ])]
+    #[Validate([
+        'validator' => 'NotEmpty'
+    ])]
     protected string $scientificName;
 
     protected ?Taxon $parentTaxon;
 
+    #[Validate([
+        'validator' => 'NotEmpty'
+    ])]
     protected TaxonLevel $taxonLevel;
 
     /**
