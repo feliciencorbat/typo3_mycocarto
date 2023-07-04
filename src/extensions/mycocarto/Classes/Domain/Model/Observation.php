@@ -16,6 +16,9 @@ class Observation extends AbstractEntity
 
     protected Ecology $ecology;
 
+    /**
+     * @var ObjectStorage<Tree>
+     */
     protected ObjectStorage $trees;
 
     protected Species $species;
@@ -95,7 +98,7 @@ class Observation extends AbstractEntity
     }
 
     /**
-     * @return ObjectStorage
+     * @return ObjectStorage<Tree>
      */
     public function getTrees(): ObjectStorage
     {
@@ -103,7 +106,25 @@ class Observation extends AbstractEntity
     }
 
     /**
-     * @param ObjectStorage $trees
+     * @param Tree $tree
+     * @return void
+     */
+    public function addTree(Tree $tree): void
+    {
+        $this->trees->attach($tree);
+    }
+
+    /**
+     * @param Tree $tree
+     * @return void
+     */
+    public function removeTree(Tree $tree): void
+    {
+        $this->trees->detach($tree);
+    }
+
+    /**
+     * @param ObjectStorage<Tree> $trees
      * @return void
      */
     public function setTrees(ObjectStorage $trees): void

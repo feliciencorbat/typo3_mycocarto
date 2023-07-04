@@ -3,11 +3,12 @@
 return [
     'ctrl' => [
         'title' => 'Species',
-        'label' => 'species',
+        'label' => 'genus',
         'tstamp' => 'tstamp',
         'crdate' => 'crdate',
         'delete' => 'deleted',
         'sortby' => 'sorting',
+        'iconfile' => 'EXT:mycocarto/Resources/Public/Icons/icon_mycocarto.svg'
     ],
     'columns' => [
         'genus' => [
@@ -43,9 +44,14 @@ return [
             'config' => [
                 'type' => 'select',
                 'renderType' => 'selectSingle',
-                'foreign_table' => 'tx_systematic_domain_model_taxon',
+                'foreign_table' => 'tx_mycocarto_domain_model_taxon',
                 'required' => true,
             ],
         ],
+    ],
+    'types' => [
+        '0' => [
+            'showitem' => 'genus, species, author, family',
+        ]
     ],
 ];

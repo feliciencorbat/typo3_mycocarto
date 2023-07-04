@@ -3,11 +3,12 @@
 return [
     'ctrl' => [
         'title' => 'Observation',
-        'label' => 'observation',
+        'label' => 'species',
         'tstamp' => 'tstamp',
         'crdate' => 'crdate',
         'delete' => 'deleted',
         'sortby' => 'sorting',
+        'iconfile' => 'EXT:mycocarto/Resources/Public/Icons/icon_mycocarto.svg'
     ],
     'columns' => [
         'date' => [
@@ -23,8 +24,8 @@ return [
             'label' => 'latitude',
             'config' => [
                 'type' => 'input',
-                'size' => 250,
-                'eval' => 'trim',
+                'size' => 50,
+                'eval' => 'double2',
                 'required' => true,
             ],
         ],
@@ -32,38 +33,45 @@ return [
             'label' => 'longitude',
             'config' => [
                 'type' => 'input',
-                'size' => 250,
-                'eval' => 'trim',
+                'size' => 50,
+                'eval' => 'double2',
                 'required' => true,
             ],
         ],
         'ecology' => [
-            'exclude' => false,
             'label' => 'ecology',
-            'description' => 'Ecology',
+            'description' => 'Ecologie',
             'config' => [
                 'type' => 'select',
                 'renderType' => 'selectSingle',
                 'foreign_table' => 'tx_mycocarto_domain_model_ecology',
                 'required' => true,
-                'default' => 0,
-                'minitems' => 1,
-                'maxitems' => 1,
             ],
         ],
         'species' => [
-            'exclude' => false,
             'label' => 'species',
-            'description' => 'Species',
+            'description' => 'Espèce',
             'config' => [
                 'type' => 'select',
                 'renderType' => 'selectSingle',
                 'foreign_table' => 'tx_mycocarto_domain_model_species',
                 'required' => true,
-                'default' => 0,
-                'minitems' => 1,
-                'maxitems' => 1,
             ],
         ],
+        'trees' => [
+            'label' => 'scientific_name',
+            'description' => 'Arbres',
+            'config' => [
+                'type' => 'select',
+                'renderType' => 'selectCheckBox',
+                'foreign_table' => 'tx_mycocarto_domain_model_tree',
+                'MM' => 'tx_mycocarto_domain_model_observation_tree_mm'
+            ],
+        ],
+    ],
+    'types' => [
+        '0' => [
+            'showitem' => 'date, latitude, longitude, ecology, species, trees',
+        ]
     ],
 ];

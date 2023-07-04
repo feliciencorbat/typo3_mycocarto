@@ -12,7 +12,7 @@
     <f:render partial="FormErrors" />
 
     <f:form action="create" name="newObservation" object="{newObservation}">
-        <f:render partial="Observation/FormFields" arguments="{speciesList: speciesList, ecologies: ecologies}" />
+        <f:render partial="Observation/FormFields" arguments="{speciesList: speciesList, ecologies: ecologies, trees: trees}" />
         <f:form.submit value="Ajouter" class="btn btn-default"/>
     </f:form>
 </f:section>

@@ -3,11 +3,12 @@
 return [
     'ctrl' => [
         'title' => 'Tree',
-        'label' => 'tree',
+        'label' => 'scientific_name',
         'tstamp' => 'tstamp',
         'crdate' => 'crdate',
         'delete' => 'deleted',
         'sortby' => 'sorting',
+        'iconfile' => 'EXT:mycocarto/Resources/Public/Icons/icon_mycocarto.svg'
     ],
     'columns' => [
         'name' => [
@@ -28,5 +29,10 @@ return [
                 'required' => true,
             ],
         ],
+    ],
+    'types' => [
+        '0' => [
+            'showitem' => 'name, scientific_name',
+        ]
     ],
 ];

@@ -22,5 +22,17 @@
 <label for="ecology" class="form-label">
   Ecologie <span class="required">(requise)</span>
 </label><br />
-<f:form.select class="form-control" property="ecology" id="ecology" options="{ecologies}" optionValueField="uid" optionLabelField="name" /><br />
+<f:form.datepicker class="form-control" property="ecology" id="ecology" options="{ecologies}" optionValueField="uid" optionLabelField="name" /><br />
+
+<label for="trees" class="form-label">
+  Arbres
+</label><br />
+<div class="form-check" id="trees">
+  <f:for each="{trees}" as="tree" key="{tree.uid}">
+    <f:form.checkbox class="form-check-input" multiple="1" property="trees" id="{tree.uid}" value="{tree.uid}"/>
+    <label for="{tree.uid}" class="form-label">
+      {tree.completeName}
+    </label><br />
+  </f:for>
+</div>
 </html>

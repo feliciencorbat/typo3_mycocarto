@@ -3,11 +3,12 @@
 return [
     'ctrl' => [
         'title' => 'Taxon',
-        'label' => 'taxon',
+        'label' => 'scientific_name',
         'tstamp' => 'tstamp',
         'crdate' => 'crdate',
         'delete' => 'deleted',
         'sortby' => 'sorting',
+        'iconfile' => 'EXT:mycocarto/Resources/Public/Icons/icon_mycocarto.svg'
     ],
     'columns' => [
         'scientific_name' => [
@@ -25,7 +26,7 @@ return [
             'config' => [
                 'type' => 'select',
                 'renderType' => 'selectSingle',
-                'foreign_table' => 'tx_systematic_domain_model_taxon',
+                'foreign_table' => 'tx_mycocarto_domain_model_taxon',
             ],
 
         ],
@@ -35,10 +36,15 @@ return [
             'config' => [
                 'type' => 'select',
                 'renderType' => 'selectSingle',
-                'foreign_table' => 'tx_systematic_domain_model_taxon_level',
+                'foreign_table' => 'tx_mycocarto_domain_model_taxonlevel',
                 'required' => true,
             ],
 
         ],
+    ],
+    'types' => [
+        '0' => [
+            'showitem' => 'scientific_name, parent_taxon, taxon_level',
+        ]
     ],
 ];
