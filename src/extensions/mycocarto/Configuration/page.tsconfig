@@ -1,0 +1,17 @@
+mod.wizards.newContentElement.wizardItems {
+  plugins {
+    elements {
+      mycocarto_observations {
+        iconIdentifier = tx_mycocarto_logo
+        title = Mycocarto Observations
+        description = Montrer, ajouter et modifier des observations
+        tt_content_defValues {
+          CType = list
+          list_type = mycocarto_observations
+        }
+      }
+    }
+
+    show = *
+  }
+}

@@ -2,7 +2,7 @@
 <label for="date" class="form-label">
   Date <span class="required">(requise)</span>
 </label><br />
-<f:form.textfield property="date" id="date" class="form-control" value="{observation.date->f:format.date(format:'Y-m-d\TH:i:sP')}"></f:form.textfield>
+<f:form.textfield property="date" id="date" class="form-control" value="{observation.date->f:format.date(format:'Y-m-d\TH:i:sP')}"></f:form.textfield><br />
 
 <label for="latitude" class="form-label">
   Latitude <span class="required">(requise)</span>
@@ -22,7 +22,7 @@
 <label for="ecology" class="form-label">
   Ecologie <span class="required">(requise)</span>
 </label><br />
-<f:form.datepicker class="form-control" property="ecology" id="ecology" options="{ecologies}" optionValueField="uid" optionLabelField="name" /><br />
+<f:form.select class="form-control" property="ecology" id="ecology" options="{ecologies}" optionValueField="uid" optionLabelField="name" /><br />
 
 <label for="trees" class="form-label">
   Arbres
@@ -35,4 +35,5 @@
     </label><br />
   </f:for>
 </div>
+<f:debug>{_all}</f:debug>
 </html>
