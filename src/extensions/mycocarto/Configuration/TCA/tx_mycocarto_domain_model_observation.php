@@ -19,7 +19,9 @@ return [
             'config' => [
                 'type' => 'datetime',
                 'format' => 'date',
-                'eval' => 'int',
+                'eval' => 'datetime',
+                'required' => true,
+                'size' => 20,
                 'default' => 0,
             ],
         ],
@@ -61,6 +63,7 @@ return [
                 'required' => true,
             ],
         ],
+        /*
         'trees' => [
             'label' => 'scientific_name',
             'description' => 'Arbres',
@@ -71,6 +74,7 @@ return [
                 'MM' => 'tx_mycocarto_domain_model_observation_tree_mm'
             ],
         ],
+        */
     ],
     'types' => [
         '0' => [

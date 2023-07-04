@@ -40,7 +40,7 @@ CREATE TABLE tx_mycocarto_domain_model_taxonlevel
 
 CREATE TABLE tx_mycocarto_domain_model_observation
 (
-    date      int(10)          NOT NULL,
+    date      int(11)          NOT NULL,
     latitude  float            NOT NULL,
     longitude float            NOT NULL,
     ecology   int(11) unsigned NOT NULL,
