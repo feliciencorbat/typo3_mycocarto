@@ -1,9 +1,12 @@
 <?php
 
+use Feliciencorbat\Mycocarto\Documentation\Userfuncs\Tca\Tca;
+
 return [
     'ctrl' => [
         'title' => 'Observation',
         'label' => 'species',
+        'label_userFunc' => Tca::class . '->completeObservationTitle',
         'tstamp' => 'tstamp',
         'crdate' => 'crdate',
         'delete' => 'deleted',
