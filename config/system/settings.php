@@ -1,7 +1,7 @@
 <?php
 return [
     'BE' => [
-        'debug' => false,
+        'debug' => true,
         'installToolPassword' => '$argon2i$v=19$m=65536,t=16,p=1$US9RektubGFHMS9POTBjNw$aqXnVitnPcCxHpypjCIgfIFWlRZdtgGyaGkYPjbMCb8',
         'passwordHashing' => [
             'className' => 'TYPO3\\CMS\\Core\\Crypto\\PasswordHashing\\Argon2iPasswordHash',
@@ -75,7 +75,7 @@ return [
         ],
     ],
     'FE' => [
-        'debug' => false,
+        'debug' => true,
         'passwordHashing' => [
             'className' => 'TYPO3\\CMS\\Core\\Crypto\\PasswordHashing\\Argon2iPasswordHash',
             'options' => [],
@@ -96,7 +96,7 @@ return [
                     'writerConfiguration' => [
                         'notice' => [
                             'TYPO3\CMS\Core\Log\Writer\FileWriter' => [
-                                'disabled' => true,
+                                'disabled' => false,
                             ],
                         ],
                     ],
@@ -138,10 +138,10 @@ return [
                 ],
             ],
         ],
-        'devIPmask' => '',
-        'displayErrors' => 0,
+        'devIPmask' => '*',
+        'displayErrors' => 1,
         'encryptionKey' => '58f2d1267d67ea61d1869d571bc3d52ff400e0f44451fb8a92d09b40ecc44801b4d4ec5ac572bbd2d8b5471304e0bb1e',
-        'exceptionalErrors' => 4096,
+        'exceptionalErrors' => 12290,
         'sitename' => 'MycoCarto',
         'systemMaintainers' => [
             1,

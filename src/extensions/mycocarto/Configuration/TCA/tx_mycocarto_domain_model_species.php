@@ -11,7 +11,12 @@ return [
         'crdate' => 'crdate',
         'delete' => 'deleted',
         'sortby' => 'sorting',
-        'iconfile' => 'EXT:mycocarto/Resources/Public/Icons/icon_mycocarto.svg'
+        'iconfile' => 'EXT:mycocarto/Resources/Public/Icons/icon_mycocarto.svg',
+        'security' => [
+            'ignorePageTypeRestriction' => true,
+            'ignoreWebMountRestriction' => true,
+            'ignoreRootLevelRestriction' => true,
+        ],
     ],
     'columns' => [
         'genus' => [

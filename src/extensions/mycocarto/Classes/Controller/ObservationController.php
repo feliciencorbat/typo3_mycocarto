@@ -72,8 +72,6 @@ class ObservationController extends ActionController
      */
     public function createAction(Observation $newObservation): ResponseInterface
     {
-        //var_dump($newObservation->getTrees());
-        //die;
         $this->observationRepository->add($newObservation);
         return $this->redirect('list');
     }

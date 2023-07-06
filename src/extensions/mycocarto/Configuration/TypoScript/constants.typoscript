@@ -1,19 +1,16 @@
 plugin.tx_news {
    view.twb5 {
-      templateRootPath {
-         0 = EXT:news/Resources/Private/Templates/Styles/Twb5/Templates/
+       templateRootPaths {
          10 = EXT:mycocarto/Resources/Private/Extensions/News/Templates/Styles/Twb5/Templates/
          20 = {$plugin.tx_news.view.templateRootPath}
-      }
-      partialRootPath {
-         0 = EXT:news/Resources/Private/Templates/Styles/Twb5/Partials/
+       }
+       partialRootPaths {
          10 = EXT:mycocarto/Resources/Private/Extensions/News/Templates/Styles/Twb5/Partials/
-         20 = {$plugin.tx_news.view.partialRootPath}
-      }
-      layoutRootPath {
-         0 = EXT:news/Resources/Private/Templates/Styles/Twb5/Layouts/
+         20 = {$plugin.tx_news.view.templateRootPath}
+       }
+       layoutRootPaths {
          10 = EXT:mycocarto/Resources/Private/Extensions/News/Templates/Styles/Twb5/Layouts/
-         20 = {$plugin.tx_news.view.layoutRootPath}
-      }
+         20 = {$plugin.tx_news.view.templateRootPath}
+       }
    }
 }

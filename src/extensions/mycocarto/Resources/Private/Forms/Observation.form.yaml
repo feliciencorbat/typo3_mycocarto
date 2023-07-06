@@ -1,0 +1,195 @@
+identifier: newObservation
+label: 'New Observation'
+prototypeName: standard
+type: Form
+
+renderingOptions:
+  controllerAction: new
+  submitButtonLabel: Envoyer
+  addQueryString: false
+  argumentsToBeExcludedFromQueryString: [ ]
+  additionalParams: [ ]
+
+renderables:
+  -
+    identifier: page-1
+    type: Page
+    label: 'Page 1'
+
+    renderables:
+      -
+        identifier: date
+        label: 'Date'
+        type: DatePicker
+        properties:
+          dateFormat: 'Y-m-d\TH:i:sP'
+          enableDatePicker: false
+          displayTimeSelector: false
+          elementDescription: ''
+          fluidAdditionalAttributes:
+            placeholder: Date
+            required: required
+          validationErrorMessages:
+            -
+              code: 1221560910
+              message: 'La date est obligatoire'
+            -
+              code: 1221560718
+              message: 'La date est obligatoire'
+            -
+              code: 1347992400
+              message: 'La date est obligatoire'
+            -
+              code: 1347992453
+              message: 'La date est obligatoire'
+        validators:
+          -
+            identifier: NotEmpty
+
+
+      -
+        identifier: latitude
+        label: 'Latitude'
+        type: Number
+        defaultValue: ''
+        properties:
+          fluidAdditionalAttributes:
+            step: 1
+            placeholder: Latitude
+            required: required
+            min: '-90'
+            max: '90'
+          validationErrorMessages:
+            -
+              code: 1221560910
+              message: 'La latitude est obligatoire'
+            -
+              code: 1221560718
+              message: 'La latitude est obligatoire'
+            -
+              code: 1347992400
+              message: 'La latitude est obligatoire'
+            -
+              code: 1347992453
+              message: 'La latitude est obligatoire'
+            -
+              code: 1221563685
+              message: 'La latitude doit être comprise entre -90 et 90'
+            -
+              code: 1221561046
+              message: 'La latitude doit être comprise entre -90 et 90'
+            -
+              code: 1221560288
+              message: "La latitude n'est pas valide"
+        validators:
+          -
+            identifier: Number
+          -
+            identifier: NotEmpty
+          -
+            options:
+              minimum: '-90.0'
+              maximum: '90.0'
+            identifier: NumberRange
+
+
+      -
+        identifier: longitude
+        label: 'Longitude'
+        type: Number
+        defaultValue: ''
+        properties:
+          fluidAdditionalAttributes:
+            step: 1
+            placeholder: Longitude
+            required: required
+            min: '-180'
+            max: '180'
+          validationErrorMessages:
+            -
+              code: 1221560910
+              message: 'La longitude est obligatoire'
+            -
+              code: 1221560718
+              message: 'La longitude est obligatoire'
+            -
+              code: 1347992400
+              message: 'La longitude est obligatoire'
+            -
+              code: 1347992453
+              message: 'La longitude est obligatoire'
+            -
+              code: 1221563685
+              message: 'La longitude doit être comprise entre -180 et 180'
+            -
+              code: 1221561046
+              message: 'La longitude doit être comprise entre -180 et 180'
+            -
+              code: 1221560288
+              message: "La longitude n'est pas valide"
+        validators:
+          -
+            identifier: Number
+          -
+            identifier: NotEmpty
+          -
+            options:
+              minimum: '-180'
+              maximum: '180'
+            identifier: NumberRange
+
+
+      -
+        identifier: species
+        label: 'Espèce'
+        type: SingleSelect
+        properties:
+          options:
+            21: 'Amanita muscaria'
+          fluidAdditionalAttributes:
+            required: required
+          validationErrorMessages:
+            -
+              code: 1221560910
+              message: "L'espèce est obligatoire"
+            -
+              code: 1221560718
+              message: "L'espèce est obligatoire"
+            -
+              code: 1347992400
+              message: "L'espèce est obligatoire"
+            -
+              code: 1347992453
+              message: "L'espèce est obligatoire"
+          prependOptionLabel: 'Choisir une espèce...'
+        validators:
+          -
+            identifier: NotEmpty
+
+
+      -
+        identifier: ecology
+        label: 'Ecologie'
+        type: SingleSelect
+        properties:
+          options:
+            3: Forêt
+          prependOptionLabel: 'Choisir une écologie...'
+          fluidAdditionalAttributes:
+            required: required
+          validationErrorMessages:
+            -
+              code: 1221560910
+              message: "L'écologie est obligatoire"
+            -
+              code: 1221560718
+              message: "L'écologie est obligatoire"
+            -
+              code: 1347992400
+              message: "L'écologie est obligatoire"
+            -
+              code: 1347992453
+              message: "L'écologie est obligatoire"
+        validators:
+          -
+            identifier: NotEmpty

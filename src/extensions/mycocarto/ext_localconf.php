@@ -21,11 +21,18 @@ ExtensionUtility::configurePlugin(
 
 call_user_func(function()
 {
-    $extensionKey = 'mycocarto';
-
     ExtensionManagementUtility::addTypoScript(
-        $extensionKey,
+        'mycocarto',
         'constants',
         "@import 'EXT:mycocarto/Configuration/TypoScript/constants.typoscript'"
+    );
+});
+
+call_user_func(function()
+{
+    ExtensionManagementUtility::addTypoScript(
+        'mycocarto',
+        'setup',
+        "@import 'EXT:mycocarto/Configuration/TypoScript/setup.typoscript'"
     );
 });
