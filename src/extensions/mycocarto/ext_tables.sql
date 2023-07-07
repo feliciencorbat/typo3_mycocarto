@@ -45,7 +45,7 @@ CREATE TABLE tx_mycocarto_domain_model_observation
     longitude float            NOT NULL,
     ecology   int(11) unsigned NOT NULL,
     species   int(11) unsigned NOT NULL,
-    trees   int(11) unsigned NOT NULL,
+    trees     int(11) unsigned NOT NULL,
     UNIQUE KEY unique_observation (date, latitude, longitude, ecology, species, deleted),
     KEY index_ecology (ecology),
     KEY index_species (species)

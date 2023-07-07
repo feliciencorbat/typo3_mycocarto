@@ -12,7 +12,7 @@
     <f:render partial="FormErrors" />
 
     <f:form action="update" name="observation" object="{observation}">
-        <f:render partial="Observation/FormFields"  arguments="{controllerAction: 'edit', buttonTitle: 'Modifier l\'observation', observation: observation, speciesList: speciesList, ecologies: ecologies, trees: trees}" />
+        <f:render partial="Observation/FormFields"  arguments="{observation: observation, speciesList: speciesList, ecologies: ecologies, trees: trees}" />
         <f:form.submit value="Mettre à jour" class="btn btn-default" />
     </f:form>
 </f:section>

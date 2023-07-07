@@ -2,7 +2,6 @@
 
 namespace Feliciencorbat\Mycocarto\Controller;
 
-use Feliciencorbat\Mycocarto\Domain\Model\Ecology;
 use Feliciencorbat\Mycocarto\Domain\Model\Observation;
 use Feliciencorbat\Mycocarto\Domain\Repository\EcologyRepository;
 use Feliciencorbat\Mycocarto\Domain\Repository\ObservationRepository;

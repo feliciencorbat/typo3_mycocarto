@@ -2,6 +2,7 @@
 
 namespace Feliciencorbat\Mycocarto\Service;
 
+use Exception;
 use Feliciencorbat\Mycocarto\Domain\Model\Species;
 use Feliciencorbat\Mycocarto\Domain\Model\Taxon;
 use Feliciencorbat\Mycocarto\Domain\Model\TaxonLevel;
@@ -10,6 +11,7 @@ use Feliciencorbat\Mycocarto\Domain\Repository\TaxonLevelRepository;
 use Feliciencorbat\Mycocarto\Domain\Repository\TaxonRepository;
 use TYPO3\CMS\Core\Error\Http\BadRequestException;
 use TYPO3\CMS\Extbase\Persistence\Exception\IllegalObjectTypeException;
+use TYPO3\CMS\Extbase\Persistence\Exception\UnknownObjectException;
 use TYPO3\CMS\Extbase\Persistence\Generic\PersistenceManager;
 
 class SpeciesWithTaxa
@@ -26,8 +28,10 @@ class SpeciesWithTaxa
     /**
      * @throws IllegalObjectTypeException
      * @throws BadRequestException
+     * @throws UnknownObjectException
+     * @throws Exception
      */
-    public function persistCompleteSpecies(Species $species): void
+    public function persistCompleteSpecies(Species $species, string $action): void
     {
 
         // add kingdom if it doesn't exist
@@ -54,16 +58,27 @@ class SpeciesWithTaxa
         $family->setParentTaxon($order);
         $family = $this->addTaxon($family);
 
-        // add species if it doesn't exist
-        $speciesFound = $this->speciesRepository->findOneBy(['genus' => $species->getGenus(), 'species' => $species->getSpecies()]);
-        if (empty($speciesFound)) {
-            $species->setFamily($family);
-            $this->speciesRepository->add($species);
-            $this->persistenceManager->persistAll();
+        // add species if it doesn't exist and create action
+        if ($action == "create") {
+            $speciesFound = $this->speciesRepository->findOneBy(['genus' => $species->getGenus(), 'species' => $species->getSpecies()]);
+            if (empty($speciesFound)) {
+                $species->setFamily($family);
+                $this->speciesRepository->add($species);
+                $this->persistenceManager->persistAll();
+            } else {
+                throw new BadRequestException("L'espèce existe déjà.", 404);
+            }
+        // update species if update action
+        } else if ($action == "update") {
+            $speciesFound = $this->speciesRepository->findOneBy(['genus' => $species->getGenus(), 'species' => $species->getSpecies()]);
+            $speciesFound->setFamily($family);
+            $speciesFound->setGenus($species->getGenus());
+            $speciesFound->setSpecies($species->getSpecies());
+            $speciesFound->setAuthor($species->getAuthor());
+            $this->speciesRepository->update($speciesFound);
         } else {
-            throw new BadRequestException("L'espèce existe déjà.", 404);
+            throw new Exception("Il ne s'agit ni d'un ajout d'espèce, ni d'une mise-à-jour...", 500);
         }
-
     }
 
     /**
