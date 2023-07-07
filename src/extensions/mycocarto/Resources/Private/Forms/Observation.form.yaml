@@ -4,17 +4,16 @@ prototypeName: standard
 type: Form
 
 renderingOptions:
-  controllerAction: new
   submitButtonLabel: Envoyer
   addQueryString: false
-  argumentsToBeExcludedFromQueryString: [ ]
-  additionalParams: [ ]
+  argumentsToBeExcludedFromQueryString: []
+  additionalParams: []
 
 renderables:
   -
     identifier: page-1
     type: Page
-    label: 'Page 1'
+    label: ''
 
     renderables:
       -
