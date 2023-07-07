@@ -25,7 +25,7 @@
                 <td>{observation.ecology.name}</td>
                 <td>
                     <f:for each="{observation.trees}" as="tree">
-                        {tree}
+                        {tree.name} - <span class="fst-italic">{tree.scientificName}</span><br/>
                     </f:for>
                 </td>
                 <td>{observation.latitude} / {observation.longitude}</td>
@@ -40,7 +40,5 @@
     </f:if>
 
     <f:link.action action="new" class="btn btn-primary mt-4">Nouvelle observation</f:link.action>
-
-    <f:debug>{observations}</f:debug>
 </f:section>
 </html>

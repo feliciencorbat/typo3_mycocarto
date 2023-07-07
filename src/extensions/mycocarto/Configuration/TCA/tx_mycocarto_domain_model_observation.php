@@ -68,7 +68,7 @@ return [
                 'required' => true,
             ],
         ],
-        /*
+
         'trees' => [
             'label' => 'scientific_name',
             'description' => 'Arbres',
@@ -79,7 +79,7 @@ return [
                 'MM' => 'tx_mycocarto_domain_model_observation_tree_mm'
             ],
         ],
-        */
+
     ],
     'types' => [
         '0' => [
