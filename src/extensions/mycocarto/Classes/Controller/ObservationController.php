@@ -11,6 +11,7 @@ use Psr\Http\Message\ResponseInterface;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
 use TYPO3\CMS\Extbase\Persistence\Exception\IllegalObjectTypeException;
 use TYPO3\CMS\Extbase\Persistence\Exception\UnknownObjectException;
+use TYPO3\CMS\Extbase\Property\TypeConverter\DateTimeConverter;
 
 class ObservationController extends ActionController
 {
@@ -27,6 +28,33 @@ class ObservationController extends ActionController
     {
     }
 
+    /**
+     * Convert date format
+     *
+     * @return void
+     */
+    public function initializeCreateAction(): void
+    {
+        $this->convertDate('newObservation');
+    }
+
+    /**
+     * Convert date format
+     *
+     * @return void
+     */
+    public function initializeUpdateAction(): void
+    {
+        $this->convertDate('observation');
+    }
+
+    private function convertDate(string $argument): void
+    {
+        $this->arguments[$argument]
+            ->getPropertyMappingConfiguration()
+            ->forProperty('date')
+            ->setTypeConverterOption(DateTimeConverter::class, DateTimeConverter::CONFIGURATION_DATE_FORMAT, 'd.m.Y');
+    }
 
     /**
      * @return ResponseInterface

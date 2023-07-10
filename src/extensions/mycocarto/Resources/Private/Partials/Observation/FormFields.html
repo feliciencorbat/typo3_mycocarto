@@ -1,8 +1,15 @@
 <html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" data-namespace-typo3-fluid="true">
+    <f:asset.css identifier="identifier3829465683" href="EXT:mycocarto/Resources/Public/Css/bootstrap-datepicker.css" />
+    <f:asset.script identifier="identifier89739237587" src="EXT:mycocarto/Resources/Public/JavaScript/jquery3.7.0.min.js" />
+    <f:asset.script identifier="identifier36547652765" src="EXT:mycocarto/Resources/Public/JavaScript/bootstrap-datepicker.min.js" />
+    <f:asset.script identifier="identifier8384684" src="EXT:mycocarto/Resources/Public/JavaScript/bootstrap-datepicker.fr.min.js" />
+
+
     <label for="date" class="form-label">
         Date <span class="required">(requise)</span>
     </label><br />
-    <f:form.textfield property="date" id="date" class="form-control" value="{observation.date->f:format.date(format:'Y-m-d\TH:i:sP')}"></f:form.textfield><br />
+
+    <f:form.textfield additionalAttributes="{data-provide: 'datepicker-inline', data-date-format: 'dd.mm.yyyy'}" property="date" id="date" class="form-control" value="{observation.date->f:format.date(format:'m.d.Y')}"></f:form.textfield><br />
 
     <label for="latitude" class="form-label">
         Latitude <span class="required">(requise)</span>
