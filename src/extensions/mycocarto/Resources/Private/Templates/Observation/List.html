@@ -16,6 +16,7 @@
             <th>Ecologie</th>
             <th>Arbres</th>
             <th>Coordonnées</th>
+            <th>Auteur</th>
             <th></th>
             <th></th>
         </tr>
@@ -30,6 +31,7 @@
                     </f:for>
                 </td>
                 <td><f:link.action action="showMap" arguments="{observation: observation}">{observation.latitude} / {observation.longitude}</f:link.action></td>
+                <td>{observation.user.name}</td>
                 <td><f:link.action action="edit" arguments="{observation: observation}" class="btn btn-default">Modifier</f:link.action></td>
                 <td><f:link.action action="delete" arguments="{observation: observation}" class="btn btn-danger">Supprimer</f:link.action></td>
             </tr>
@@ -42,4 +44,5 @@
 
     <f:link.action action="new" class="btn btn-primary mt-4">Nouvelle observation</f:link.action>
 </f:section>
+<f:debug>{observation}</f:debug>
 </html>

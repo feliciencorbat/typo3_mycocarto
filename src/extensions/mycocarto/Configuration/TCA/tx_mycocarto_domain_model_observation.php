@@ -5,18 +5,12 @@ use Feliciencorbat\Mycocarto\Documentation\Userfuncs\Tca\Tca;
 return [
     'ctrl' => [
         'title' => 'Observation',
-        'label' => 'species',
-        'label_userFunc' => Tca::class . '->completeObservationTitle',
+        'label' => 'date',
         'tstamp' => 'tstamp',
         'crdate' => 'crdate',
         'delete' => 'deleted',
         'sortby' => 'sorting',
-        'iconfile' => 'EXT:mycocarto/Resources/Public/Icons/icon_mycocarto.svg',
-        'security' => [
-            'ignorePageTypeRestriction' => true,
-            'ignoreWebMountRestriction' => true,
-            'ignoreRootLevelRestriction' => true,
-        ],
+        'iconfile' => 'EXT:mycocarto/Resources/Public/Icons/icon_mycocarto.svg'
     ],
     'columns' => [
         'date' => [
@@ -80,10 +74,21 @@ return [
             ],
         ],
 
+        'user' => [
+            'label' => 'user',
+            'description' => 'Utilisateur',
+            'config' => [
+                'type' => 'select',
+                'renderType' => 'selectSingle',
+                'foreign_table' => 'fe_users',
+                'required' => true,
+            ],
+        ],
+
     ],
     'types' => [
         '0' => [
-            'showitem' => 'date, latitude, longitude, ecology, species, trees',
+            'showitem' => 'date, latitude, longitude, ecology, species, trees, user',
         ]
     ],
 ];

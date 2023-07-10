@@ -5,6 +5,7 @@ namespace Feliciencorbat\Mycocarto\Domain\Model;
 use DateTime;
 use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
 use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
+use TYPO3\CMS\Frontend\Authentication\FrontendUserAuthentication;
 
 class Observation extends AbstractEntity
 {
@@ -22,6 +23,8 @@ class Observation extends AbstractEntity
     protected ObjectStorage $trees;
 
     protected Species $species;
+
+    protected User $user;
 
     public function __construct()
     {
@@ -146,5 +149,21 @@ class Observation extends AbstractEntity
     public function setSpecies(Species $species): void
     {
         $this->species = $species;
+    }
+
+    /**
+     * @return User
+     */
+    public function getUser(): User
+    {
+        return $this->user;
+    }
+
+    /**
+     * @param User $user
+     */
+    public function setUser(User $user): void
+    {
+        $this->user = $user;
     }
 }
