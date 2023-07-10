@@ -14,9 +14,9 @@ ExtensionUtility::configurePlugin(
     // arbitrary, but unique plugin name (not visible in the backend)
     'Observations',
     // all actions
-    [ObservationController::class => 'list, new, create, edit, update, delete'],
+    [ObservationController::class => 'list, new, create, edit, update, delete, showMap'],
     // non-cacheable actions
-    [ObservationController::class => 'list, new, create, edit, update, delete'],
+    [ObservationController::class => 'list, new, create, edit, update, delete, showMap'],
 );
 
 call_user_func(function()

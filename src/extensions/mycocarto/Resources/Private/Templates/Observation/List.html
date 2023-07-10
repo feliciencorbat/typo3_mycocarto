@@ -29,7 +29,7 @@
                         {tree.name} - <span class="fst-italic">{tree.scientificName}</span><br/>
                     </f:for>
                 </td>
-                <td>{observation.latitude} / {observation.longitude}</td>
+                <td><f:link.action action="showMap" arguments="{observation: observation}">{observation.latitude} / {observation.longitude}</f:link.action></td>
                 <td><f:link.action action="edit" arguments="{observation: observation}" class="btn btn-default">Modifier</f:link.action></td>
                 <td><f:link.action action="delete" arguments="{observation: observation}" class="btn btn-danger">Supprimer</f:link.action></td>
             </tr>

@@ -146,4 +146,16 @@ class ObservationController extends ActionController
         $this->observationRepository->remove($observation);
         return $this->redirect('list');
     }
+
+    /**
+     * @param Observation $observation
+     * @return ResponseInterface
+     */
+    public function showMapAction(Observation $observation): ResponseInterface
+    {
+        $this->view->assignMultiple([
+            'observation' => $observation,
+        ]);
+        return $this->htmlResponse();
+    }
 }
