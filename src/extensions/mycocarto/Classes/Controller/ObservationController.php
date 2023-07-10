@@ -7,6 +7,7 @@ use Feliciencorbat\Mycocarto\Domain\Repository\EcologyRepository;
 use Feliciencorbat\Mycocarto\Domain\Repository\ObservationRepository;
 use Feliciencorbat\Mycocarto\Domain\Repository\SpeciesRepository;
 use Feliciencorbat\Mycocarto\Domain\Repository\TreeRepository;
+use Feliciencorbat\Mycocarto\Domain\Repository\UserRepository;
 use Psr\Http\Message\ResponseInterface;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
 use TYPO3\CMS\Extbase\Persistence\Exception\IllegalObjectTypeException;
@@ -24,6 +25,7 @@ class ObservationController extends ActionController
         protected readonly SpeciesRepository $speciesRepository,
         protected readonly EcologyRepository $ecologyRepository,
         protected readonly TreeRepository $treeRepository,
+        protected readonly UserRepository $userRepository,
     )
     {
     }
@@ -99,6 +101,11 @@ class ObservationController extends ActionController
      */
     public function createAction(Observation $newObservation): ResponseInterface
     {
+        //add auth user in observation
+        $authUser = $this->request->getAttribute('frontend.user');
+        $user = $this->userRepository->findByUid($authUser->user['uid']);
+        $newObservation->setUser($user);
+
         $this->observationRepository->add($newObservation);
         return $this->redirect('list');
     }
