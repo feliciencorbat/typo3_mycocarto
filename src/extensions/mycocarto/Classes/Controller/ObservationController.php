@@ -3,6 +3,7 @@
 namespace Feliciencorbat\Mycocarto\Controller;
 
 use Feliciencorbat\Mycocarto\Domain\Model\Observation;
+use Feliciencorbat\Mycocarto\Domain\Model\User;
 use Feliciencorbat\Mycocarto\Domain\Repository\EcologyRepository;
 use Feliciencorbat\Mycocarto\Domain\Repository\ObservationRepository;
 use Feliciencorbat\Mycocarto\Domain\Repository\SpeciesRepository;
@@ -19,6 +20,8 @@ class ObservationController extends ActionController
     use PaginationTrait;
 
     const NB_OBSERVATIONS_PER_PAGE = 10;
+
+    const ADMIN_GROUP_NAME = "mycocarto_frontend_admin";
 
     public function __construct(
         protected readonly ObservationRepository $observationRepository,
@@ -63,16 +66,30 @@ class ObservationController extends ActionController
      */
     public function listAction(): ResponseInterface
     {
+        $user = $this->getCurrentUser();
+
+        // if user is admin, get all observations, else get user's observations
+        $isAdmin = $this->isAdmin($user);
+        if ($isAdmin) {
+            $allObservations = $this->observationRepository->findAll();
+        } else {
+            $allObservations = $this->observationRepository->findBy(['user' => $user]);
+        }
+
         $itemsPerPage = ObservationController::NB_OBSERVATIONS_PER_PAGE;
-        $allObservations = $this->observationRepository->findAll();
         $paginationInfos = $this->paginateObjectsList($itemsPerPage, $this->request, $allObservations);
 
-        $paginatedObservations = $this->observationRepository->findPaginatedObjects($itemsPerPage, $paginationInfos[2], ['date']);
+        if ($isAdmin) {
+            $paginatedObservations = $this->observationRepository->findPaginatedObjects($itemsPerPage, $paginationInfos[2], ['date']);
+        } else {
+            $paginatedObservations = $this->observationRepository->findPaginatedObjects($itemsPerPage, $paginationInfos[2], ['date'], $user);
+        }
 
         $this->view->assignMultiple([
             'paginator' => $paginationInfos[0],
             'pagination' => $paginationInfos[1],
-            'observations' => $paginatedObservations
+            'observations' => $paginatedObservations,
+            'isAdmin' => $isAdmin
         ]);
         return $this->htmlResponse();
     }
@@ -101,10 +118,8 @@ class ObservationController extends ActionController
      */
     public function createAction(Observation $newObservation): ResponseInterface
     {
-        //add auth user in observation
-        $authUser = $this->request->getAttribute('frontend.user');
-        $user = $this->userRepository->findByUid($authUser->user['uid']);
-        $newObservation->setUser($user);
+        //add current user in observation
+        $newObservation->setUser($this->getCurrentUser());
 
         $this->observationRepository->add($newObservation);
         return $this->redirect('list');
@@ -164,5 +179,33 @@ class ObservationController extends ActionController
             'observation' => $observation,
         ]);
         return $this->htmlResponse();
+    }
+
+    /**
+     * Get current user (authenticated user)
+     *
+     * @return User
+     */
+    private function getCurrentUser(): User
+    {
+        $authUser = $this->request->getAttribute('frontend.user');
+        return $this->userRepository->findByUid($authUser->user['uid']);
+    }
+
+    /**
+     * Test if user is admin (belongs to mycocarto_frontend_admin)
+     *
+     * @param User $user
+     * @return bool
+     */
+    private function isAdmin(User $user): bool
+    {
+        foreach($user->getUsergroup()->toArray() as $userGroup) {
+            if($userGroup->getTitle() == ObservationController::ADMIN_GROUP_NAME) {
+                return true;
+            }
+        }
+
+        return false;
     }
 }
