@@ -2,6 +2,7 @@
 
 namespace Feliciencorbat\Mycocarto\Controller;
 
+use Exception;
 use Feliciencorbat\Mycocarto\Domain\Model\Observation;
 use Feliciencorbat\Mycocarto\Domain\Model\User;
 use Feliciencorbat\Mycocarto\Domain\Repository\EcologyRepository;
@@ -10,9 +11,9 @@ use Feliciencorbat\Mycocarto\Domain\Repository\SpeciesRepository;
 use Feliciencorbat\Mycocarto\Domain\Repository\TreeRepository;
 use Feliciencorbat\Mycocarto\Domain\Repository\UserRepository;
 use Psr\Http\Message\ResponseInterface;
+use TYPO3\CMS\Backend\Exception\AccessDeniedException;
+use TYPO3\CMS\Core\Type\ContextualFeedbackSeverity;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
-use TYPO3\CMS\Extbase\Persistence\Exception\IllegalObjectTypeException;
-use TYPO3\CMS\Extbase\Persistence\Exception\UnknownObjectException;
 use TYPO3\CMS\Extbase\Property\TypeConverter\DateTimeConverter;
 
 class ObservationController extends ActionController
@@ -66,32 +67,38 @@ class ObservationController extends ActionController
      */
     public function listAction(): ResponseInterface
     {
-        $user = $this->getCurrentUser();
+        try {
+            $user = $this->getCurrentUser();
 
-        // if user is admin, get all observations, else get user's observations
-        $isAdmin = $this->isAdmin($user);
-        if ($isAdmin) {
-            $allObservations = $this->observationRepository->findAll();
-        } else {
-            $allObservations = $this->observationRepository->findBy(['user' => $user]);
+            // if user is admin, get all observations, else get user's observations
+            $isAdmin = $this->isAdmin($user);
+            if ($isAdmin) {
+                $allObservations = $this->observationRepository->findAll();
+            } else {
+                $allObservations = $this->observationRepository->findBy(['user' => $user]);
+            }
+
+            $itemsPerPage = ObservationController::NB_OBSERVATIONS_PER_PAGE;
+            $paginationInfos = $this->paginateObjectsList($itemsPerPage, $this->request, $allObservations);
+
+            if ($isAdmin) {
+                $paginatedObservations = $this->observationRepository->findPaginatedObjects($itemsPerPage, $paginationInfos[2], ['date']);
+            } else {
+                $paginatedObservations = $this->observationRepository->findPaginatedObjects($itemsPerPage, $paginationInfos[2], ['date'], $user);
+            }
+
+            $this->view->assignMultiple([
+                'paginator' => $paginationInfos[0],
+                'pagination' => $paginationInfos[1],
+                'observations' => $paginatedObservations,
+                'isAdmin' => $isAdmin
+            ]);
+            return $this->htmlResponse();
+        } catch (Exception $e) {
+            $this->addFlashMessage($e->getMessage(), 'Erreur', ContextualFeedbackSeverity::ERROR);
+            return $this->redirect('list');
         }
 
-        $itemsPerPage = ObservationController::NB_OBSERVATIONS_PER_PAGE;
-        $paginationInfos = $this->paginateObjectsList($itemsPerPage, $this->request, $allObservations);
-
-        if ($isAdmin) {
-            $paginatedObservations = $this->observationRepository->findPaginatedObjects($itemsPerPage, $paginationInfos[2], ['date']);
-        } else {
-            $paginatedObservations = $this->observationRepository->findPaginatedObjects($itemsPerPage, $paginationInfos[2], ['date'], $user);
-        }
-
-        $this->view->assignMultiple([
-            'paginator' => $paginationInfos[0],
-            'pagination' => $paginationInfos[1],
-            'observations' => $paginatedObservations,
-            'isAdmin' => $isAdmin
-        ]);
-        return $this->htmlResponse();
     }
 
     /**
@@ -114,15 +121,22 @@ class ObservationController extends ActionController
     }
 
     /**
-     * @throws IllegalObjectTypeException
+     * @param Observation $newObservation
+     * @return ResponseInterface
      */
     public function createAction(Observation $newObservation): ResponseInterface
     {
-        //add current user in observation
-        $newObservation->setUser($this->getCurrentUser());
+        try {
+            //add current user in observation
+            $newObservation->setUser($this->getCurrentUser());
 
-        $this->observationRepository->add($newObservation);
-        return $this->redirect('list');
+            $this->observationRepository->add($newObservation);
+            return $this->redirect('list');
+
+        } catch (Exception $e) {
+            $this->addFlashMessage($e->getMessage(), 'Erreur', ContextualFeedbackSeverity::ERROR);
+            return $this->redirect('list');
+        }
     }
 
     /**
@@ -131,42 +145,58 @@ class ObservationController extends ActionController
      */
     public function editAction(Observation $observation): ResponseInterface
     {
-        $this->speciesRepository->setDefaultQuerySettings($this->speciesRepository->createQuery()->getQuerySettings()->setRespectStoragePage(false));
-        $speciesList = $this->speciesRepository->findAll();
-        $this->ecologyRepository->setDefaultQuerySettings($this->ecologyRepository->createQuery()->getQuerySettings()->setRespectStoragePage(false));
-        $ecologies = $this->ecologyRepository->findAll();
-        $this->treeRepository->setDefaultQuerySettings($this->treeRepository->createQuery()->getQuerySettings()->setRespectStoragePage(false));
-        $trees = $this->treeRepository->findAll();
-        $this->view->assignMultiple([
-            'speciesList' => $speciesList,
-            'ecologies' => $ecologies,
-            'observation' => $observation,
-            'trees' => $trees
-        ]);
-        return $this->htmlResponse();
+        try {
+            $this->isAuthorized($observation);
+            $this->speciesRepository->setDefaultQuerySettings($this->speciesRepository->createQuery()->getQuerySettings()->setRespectStoragePage(false));
+            $speciesList = $this->speciesRepository->findAll();
+            $this->ecologyRepository->setDefaultQuerySettings($this->ecologyRepository->createQuery()->getQuerySettings()->setRespectStoragePage(false));
+            $ecologies = $this->ecologyRepository->findAll();
+            $this->treeRepository->setDefaultQuerySettings($this->treeRepository->createQuery()->getQuerySettings()->setRespectStoragePage(false));
+            $trees = $this->treeRepository->findAll();
+            $this->view->assignMultiple([
+                'speciesList' => $speciesList,
+                'ecologies' => $ecologies,
+                'observation' => $observation,
+                'trees' => $trees
+            ]);
+            return $this->htmlResponse();
+        } catch (Exception $e) {
+            $this->addFlashMessage($e->getMessage(), 'Erreur', ContextualFeedbackSeverity::ERROR);
+            return $this->redirect('list');
+        }
     }
 
     /**
      * @param Observation $observation
      * @return ResponseInterface
-     * @throws IllegalObjectTypeException
-     * @throws UnknownObjectException
      */
     public function updateAction(Observation $observation): ResponseInterface
     {
-        $this->observationRepository->update($observation);
-        return $this->redirect('list');
+        try {
+            $this->isAuthorized($observation);
+            $this->observationRepository->update($observation);
+            return $this->redirect('list');
+        } catch (Exception $e) {
+            $this->addFlashMessage($e->getMessage(), 'Erreur', ContextualFeedbackSeverity::ERROR);
+            return $this->redirect('list');
+        }
+
     }
 
     /**
      * @param Observation $observation
      * @return ResponseInterface
-     * @throws IllegalObjectTypeException
      */
     public function deleteAction(Observation $observation): ResponseInterface
     {
-        $this->observationRepository->remove($observation);
-        return $this->redirect('list');
+        try {
+            $this->isAuthorized($observation);
+            $this->observationRepository->remove($observation);
+            return $this->redirect('list');
+        } catch (Exception $e) {
+            $this->addFlashMessage($e->getMessage(), 'Erreur', ContextualFeedbackSeverity::ERROR);
+            return $this->redirect('list');
+        }
     }
 
     /**
@@ -207,5 +237,21 @@ class ObservationController extends ActionController
         }
 
         return false;
+    }
+
+    /**
+     * Test if observation belongs to user or user is admin
+     *
+     * @param Observation $observation
+     * @return void
+     * @throws AccessDeniedException
+     */
+    private function isAuthorized(Observation $observation): void
+    {
+        $user = $this->getCurrentUser();
+        //if not admin and not user's observation, throw exception
+        if (!$this->isAdmin($user) && $observation->getUser()->getUid() != $user->getUid()) {
+            throw new AccessDeniedException("Vous n'avez pas le droit de modifier cette observation.", 403);
+        }
     }
 }
