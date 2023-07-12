@@ -5,3 +5,19 @@ plugin.tx_form {
         }
     }
 }
+
+plugin.tx_felogin_login {
+  view {
+    templateRootPaths.10 = EXT:mycocarto/Resources/Private/Extensions/Felogin/Templates/
+    partialRootPaths.10 = EXT:mycocarto/Resources/Private/Extensions/Felogin/Partials/
+    layoutRootPaths.10 = EXT:mycocarto/Resources/Private/Extensions/Felogin/Layouts/
+  }
+}
+
+plugin.tx_news {
+   view {
+     templateRootPaths.10 = EXT:mycocarto/Resources/Private/Extensions/News/Templates/Styles/Twb5/Templates/
+     partialRootPaths.10 = EXT:mycocarto/Resources/Private/Extensions/News/Templates/Styles/Twb5/Partials/
+     layoutRootPaths.10 = EXT:mycocarto/Resources/Private/Extensions/News/Templates/Styles/Twb5/Layouts/
+   }
+}
