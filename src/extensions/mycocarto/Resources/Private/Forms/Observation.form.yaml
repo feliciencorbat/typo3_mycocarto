@@ -3,6 +3,36 @@ label: 'New Observation'
 prototypeName: standard
 type: Form
 
+finishers:
+  -
+    identifier: SaveToDatabase
+    options:
+      -
+        table: tx_mycocarto_domain_model_observation
+        mode: insert
+        elements:
+          date:
+            mapOnDatabaseColumn: date
+          latitude:
+            mapOnDatabaseColumn: latitude
+          longitude:
+            mapOnDatabaseColumn: longitude
+          ecology:
+            mapOnDatabaseColumn: ecology
+          species:
+            mapOnDatabaseColumn: species
+        databaseColumnMappings:
+          pid:
+            value: 0
+          tstamp:
+            value: '{__currentTimestamp}'
+          crdate:
+            value: '{__currentTimestamp}'
+          trees:
+            value: 0
+          user:
+            value: 1
+
 renderingOptions:
   submitButtonLabel: Envoyer
   addQueryString: false
@@ -21,7 +51,7 @@ renderables:
         label: 'Date'
         type: DatePicker
         properties:
-          dateFormat: 'Y-m-d\TH:i:sP'
+          dateFormat: 'd.m.Y'
           enableDatePicker: false
           displayTimeSelector: false
           elementDescription: ''
