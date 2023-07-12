@@ -1,11 +1,3 @@
-plugin.tx_form {
-    settings {
-        yamlConfigurations {
-            100 = EXT:mycocarto/Configuration/Form/FormSetup.yaml
-        }
-    }
-}
-
 plugin.tx_felogin_login {
   view {
     templateRootPaths.10 = EXT:mycocarto/Resources/Private/Extensions/Felogin/Templates/

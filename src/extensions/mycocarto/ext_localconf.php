@@ -36,3 +36,23 @@ call_user_func(function()
         "@import 'EXT:mycocarto/Configuration/TypoScript/setup.typoscript'"
     );
 });
+
+// Register custom EXT:form configuration
+if (ExtensionManagementUtility::isLoaded('form')) {
+    ExtensionManagementUtility::addTypoScriptSetup(trim('
+        module.tx_form {
+            settings {
+                yamlConfigurations {
+                    100 = EXT:mycocarto/Configuration/Form/FormSetup.yaml
+                }
+            }
+        }
+        plugin.tx_form {
+            settings {
+                yamlConfigurations {
+                    100 = EXT:mycocarto/Configuration/Form/FormSetup.yaml
+            }
+        }
+}
+    '));
+}
