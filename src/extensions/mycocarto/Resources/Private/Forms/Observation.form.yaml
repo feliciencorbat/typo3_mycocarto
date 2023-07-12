@@ -33,6 +33,12 @@ finishers:
           user:
             value: 1
 
+  -
+    identifier: Redirect
+    options:
+      pageUid: ''
+      additionalParameters: ''
+
 renderingOptions:
   submitButtonLabel: Envoyer
   addQueryString: false
