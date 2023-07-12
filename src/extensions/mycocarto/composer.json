@@ -6,7 +6,8 @@
         "GPL-2.0-or-later"
     ],
     "require": {
-        "typo3/cms-core": "^12.0",
+        "typo3/cms-core": "^12.4",
+        "typo3/cms-form": "^12.4",
         "georgringer/news": "^11.1",
         "bk2k/bootstrap-package": "^14.0"
     },
@@ -18,6 +19,12 @@
     "extra": {
         "typo3/cms": {
             "extension-key": "mycocarto"
+        }
+    },
+    "config": {
+        "allow-plugins": {
+            "typo3/cms-composer-installers": true,
+            "typo3/class-alias-loader": true
         }
     }
 }

@@ -7,6 +7,10 @@
 <f:section name="Content">
     <h1>Liste des observations</h1>
 
+    <f:if condition="{isAdmin}">
+        <f:link.action action="report" class="btn btn-default mt-4 mb-4">Générer rapport</f:link.action>
+    </f:if>
+
     <f:flashMessages />
 
     <table class="table">

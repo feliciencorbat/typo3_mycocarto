@@ -10,12 +10,16 @@ use Feliciencorbat\Mycocarto\Domain\Repository\ObservationRepository;
 use Feliciencorbat\Mycocarto\Domain\Repository\SpeciesRepository;
 use Feliciencorbat\Mycocarto\Domain\Repository\TreeRepository;
 use Feliciencorbat\Mycocarto\Domain\Repository\UserRepository;
+use Feliciencorbat\Mycocarto\Service\PdfReport;
 use Psr\Http\Message\ResponseInterface;
+use TCPDF;
+use TYPO3\CMS\Backend\Attribute\Controller;
 use TYPO3\CMS\Backend\Exception\AccessDeniedException;
 use TYPO3\CMS\Core\Type\ContextualFeedbackSeverity;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
 use TYPO3\CMS\Extbase\Property\TypeConverter\DateTimeConverter;
 
+#[Controller]
 class ObservationController extends ActionController
 {
     use PaginationTrait;
@@ -30,6 +34,7 @@ class ObservationController extends ActionController
         protected readonly EcologyRepository $ecologyRepository,
         protected readonly TreeRepository $treeRepository,
         protected readonly UserRepository $userRepository,
+        protected readonly PdfReport $pdfReport
     )
     {
     }
@@ -209,6 +214,22 @@ class ObservationController extends ActionController
             'observation' => $observation,
         ]);
         return $this->htmlResponse();
+    }
+
+    /**
+     * Generate report for mycocarto admin users
+     *
+     * @return ResponseInterface|void
+     */
+    public function reportAction()
+    {
+        //test if admin
+        if (!$this->isAdmin($this->getCurrentUser())) {
+            $this->addFlashMessage("Vous n'avez pas le droit de générer le rapport.", 'Erreur', ContextualFeedbackSeverity::ERROR);
+            return $this->redirect('list');
+        }
+
+        $this->pdfReport->generatePdfReport();
     }
 
     /**

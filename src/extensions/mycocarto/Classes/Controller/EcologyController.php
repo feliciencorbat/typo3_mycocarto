@@ -2,7 +2,6 @@
 
 namespace Feliciencorbat\Mycocarto\Controller;
 
-use Error;
 use Exception;
 use Feliciencorbat\Mycocarto\Domain\Model\Ecology;
 use Feliciencorbat\Mycocarto\Domain\Repository\EcologyRepository;
@@ -12,9 +11,7 @@ use TYPO3\CMS\Backend\Attribute\Controller;
 use TYPO3\CMS\Backend\Template\ModuleTemplateFactory;
 use TYPO3\CMS\Core\Type\ContextualFeedbackSeverity;
 use TYPO3\CMS\Extbase\Annotation\IgnoreValidation;
-use TYPO3\CMS\Extbase\Annotation\Validate;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
-use TYPO3\CMS\Extbase\Mvc\Exception\InfiniteLoopException;
 use TYPO3\CMS\Extbase\Persistence\Exception\IllegalObjectTypeException;
 use TYPO3\CMS\Extbase\Persistence\Exception\UnknownObjectException;
 

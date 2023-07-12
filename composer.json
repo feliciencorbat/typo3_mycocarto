@@ -17,6 +17,7 @@
 		"bk2k/bootstrap-package": "^14.0",
 		"feliciencorbat/mycocarto": "@dev",
 		"georgringer/news": "^11.1",
+		"tecnickcom/tcpdf": "^6.6",
 		"typo3/cms-backend": "^12.4.0",
 		"typo3/cms-belog": "^12.4.0",
 		"typo3/cms-beuser": "^12.4.0",
