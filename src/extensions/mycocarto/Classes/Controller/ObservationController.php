@@ -223,13 +223,17 @@ class ObservationController extends ActionController
      */
     public function reportAction()
     {
+        $user = $this->getCurrentUser();
+
         //test if admin
-        if (!$this->isAdmin($this->getCurrentUser())) {
+        if (!$this->isAdmin($user)) {
             $this->addFlashMessage("Vous n'avez pas le droit de générer le rapport.", 'Erreur', ContextualFeedbackSeverity::ERROR);
             return $this->redirect('list');
         }
 
-        $this->pdfReport->generatePdfReport();
+        $observations = $this->observationRepository->findAll();
+
+        $this->pdfReport->generatePdfReport($user->getName(), $observations->toArray());
     }
 
     /**
