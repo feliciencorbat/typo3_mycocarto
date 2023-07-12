@@ -21,3 +21,11 @@ plugin.tx_news {
      layoutRootPaths.10 = EXT:mycocarto/Resources/Private/Extensions/News/Templates/Styles/Twb5/Layouts/
    }
 }
+
+plugin.tx_bootstrappackage {
+   view {
+     templateRootPaths.10 = EXT:mycocarto/Resources/Private/Extensions/Bootstrappackage/Templates/
+     partialRootPaths.10 = EXT:mycocarto/Resources/Private/Extensions/Bootstrappackage/Partials/
+     layoutRootPaths.10 = EXT:mycocarto/Resources/Private/Extensions/Bootstrappackage/Layouts/
+   }
+}
