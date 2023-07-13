@@ -16,6 +16,7 @@ use TCPDF;
 use TYPO3\CMS\Backend\Attribute\Controller;
 use TYPO3\CMS\Backend\Exception\AccessDeniedException;
 use TYPO3\CMS\Core\Type\ContextualFeedbackSeverity;
+use TYPO3\CMS\Extbase\Annotation\IgnoreValidation;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
 use TYPO3\CMS\Extbase\Property\TypeConverter\DateTimeConverter;
 
@@ -109,6 +110,7 @@ class ObservationController extends ActionController
     /**
      * @return ResponseInterface
      */
+    #[IgnoreValidation(['argumentName' => 'newObservation'])]
     public function newAction(): ResponseInterface
     {
         $this->speciesRepository->setDefaultQuerySettings($this->speciesRepository->createQuery()->getQuerySettings()->setRespectStoragePage(false));
@@ -148,6 +150,7 @@ class ObservationController extends ActionController
      * @param Observation $observation
      * @return ResponseInterface
      */
+    #[IgnoreValidation(['argumentName' => 'observation'])]
     public function editAction(Observation $observation): ResponseInterface
     {
         try {

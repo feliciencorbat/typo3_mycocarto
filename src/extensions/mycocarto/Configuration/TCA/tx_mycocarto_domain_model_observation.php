@@ -27,18 +27,22 @@ return [
         'latitude' => [
             'label' => 'latitude',
             'config' => [
-                'type' => 'input',
-                'size' => 50,
-                'eval' => 'double2',
+                'type' => 'number',
+                'range' => [
+                    'lower' => 450000,
+                    'upper' => 850000
+                ],
                 'required' => true,
             ],
         ],
         'longitude' => [
             'label' => 'longitude',
             'config' => [
-                'type' => 'input',
-                'size' => 50,
-                'eval' => 'double2',
+                'type' => 'number',
+                'range' => [
+                    'lower' => 50000,
+                    'upper' => 300000
+                ],
                 'required' => true,
             ],
         ],

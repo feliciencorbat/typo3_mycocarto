@@ -3,16 +3,43 @@
 namespace Feliciencorbat\Mycocarto\Domain\Model;
 
 use DateTime;
+use TYPO3\CMS\Extbase\Annotation\Validate;
 use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
 use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
 use TYPO3\CMS\Frontend\Authentication\FrontendUserAuthentication;
 
 class Observation extends AbstractEntity
 {
+    #[Validate([
+        'validator' => 'DateTime',
+    ])]
+    #[Validate([
+        'validator' => 'NotEmpty'
+    ])]
     protected DateTime $date;
 
+    #[Validate([
+        'validator' => 'NumberRange',
+        'options' => ['minimum' => 450000, 'maximum' => 850000],
+    ])]
+    #[Validate([
+        'validator' => 'NotEmpty'
+    ])]
+    #[Validate([
+        'validator' => 'Float'
+    ])]
     protected float $latitude;
 
+    #[Validate([
+        'validator' => 'NumberRange',
+        'options' => ['minimum' => 50000, 'maximum' => 300000],
+    ])]
+    #[Validate([
+        'validator' => 'NotEmpty'
+    ])]
+    #[Validate([
+        'validator' => 'Float'
+    ])]
     protected float $longitude;
 
     protected Ecology $ecology;
