@@ -111,51 +111,26 @@ final class GbifSpecies
             throw new BadRequestException("L'espèce avec le nom $scientificName n'a pas toute la systématique établie.", 404);
         }
 
-        // create kingdom
-        $kingdom = new Taxon();
-        $kingdom->setScientificName($stdObjectSpecies->kingdom);
-        $kingdomTaxonLevel = new TaxonLevel();
-        $kingdomTaxonLevel->setName('kingdom');
-        $kingdom->setTaxonLevel($kingdomTaxonLevel);
+        $taxonsList = ["kingdom" => "Kingdom", 'phylum' => "Phylum", 'class' => "Classe", 'order' => "Ordre", 'family' => "Famille"];
 
-        // create phylum
-        $phylum = new Taxon();
-        $phylum->setScientificName($stdObjectSpecies->phylum);
-        $phylumTaxonLevel = new TaxonLevel();
-        $phylumTaxonLevel->setName('phylum');
-        $phylum->setTaxonLevel($phylumTaxonLevel);
-        $phylum->setParentTaxon($kingdom);
-
-        // create class
-        $class = new Taxon();
-        $class->setScientificName($stdObjectSpecies->class);
-        $classTaxonLevel = new TaxonLevel();
-        $classTaxonLevel->setName('classe');
-        $class->setTaxonLevel($classTaxonLevel);
-        $class->setParentTaxon($phylum);
-
-        // create order
-        $order = new Taxon();
-        $order->setScientificName($stdObjectSpecies->order);
-        $orderTaxonLevel = new TaxonLevel();
-        $orderTaxonLevel->setName('ordre');
-        $order->setTaxonLevel($orderTaxonLevel);
-        $order->setParentTaxon($class);
-
-        // create family
-        $family = new Taxon();
-        $family->setScientificName($stdObjectSpecies->family);
-        $familyTaxonLevel = new TaxonLevel();
-        $familyTaxonLevel->setName('famille');
-        $family->setTaxonLevel($familyTaxonLevel);
-        $family->setParentTaxon($order);
+        // create all taxa and taxa levels
+        $parentTaxon = null;
+        foreach($taxonsList as $key => $taxonName) {
+            $taxon = new Taxon();
+            $taxon->setScientificName($stdObjectSpecies->{$key});
+            $taxonLevel = new TaxonLevel();
+            $taxonLevel->setName($taxonName);
+            $taxon->setTaxonLevel($taxonLevel);
+            $taxon->setParentTaxon($parentTaxon);
+            $parentTaxon = $taxon;
+        }
 
         // create species
         $species = new Species();
         $species->setGenus($stdObjectSpecies->genus);
         $species->setSpecies($speciesTaxon);
         $species->setAuthor($stdObjectSpecies->authorship);
-        $species->setFamily($family);
+        $species->setFamily($parentTaxon);
 
         return $species;
     }
