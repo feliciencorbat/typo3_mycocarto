@@ -6,7 +6,6 @@ use DateTime;
 use TYPO3\CMS\Extbase\Annotation\Validate;
 use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
 use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
-use TYPO3\CMS\Frontend\Authentication\FrontendUserAuthentication;
 
 class Observation extends AbstractEntity
 {
@@ -51,7 +50,7 @@ class Observation extends AbstractEntity
 
     protected Species $species;
 
-    protected User $user;
+    protected ?User $user = null;
 
     public function __construct()
     {
@@ -179,18 +178,19 @@ class Observation extends AbstractEntity
     }
 
     /**
-     * @return User
+     * @return User|null
      */
-    public function getUser(): User
+    public function getUser(): ?User
     {
         return $this->user;
     }
 
     /**
-     * @param User $user
+     * @param User|null $user
      */
-    public function setUser(User $user): void
+    public function setUser(?User $user): void
     {
         $this->user = $user;
     }
+
 }
