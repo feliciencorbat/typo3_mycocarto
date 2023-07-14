@@ -110,4 +110,21 @@ final class SpeciesController extends ActionController
             return $this->redirect('list');
         }
     }
+
+    public function getSpeciesByQueryAction(): ResponseInterface
+    {
+        //try {
+            $search = $this->request->getArgument('q');
+            $this->speciesRepository->setDefaultQuerySettings($this->speciesRepository->createQuery()->getQuerySettings()->setRespectStoragePage(false));
+            $speciesList = $this->speciesRepository->getSpeciesByQuery($search);
+            $jsonOutput = json_encode($speciesList);
+            var_dump($jsonOutput);
+            die;
+            return $this->jsonResponse($jsonOutput);
+        //} catch(Exception $e) {
+            //$this->addFlashMessage($e->getMessage(),'Erreur', ContextualFeedbackSeverity::ERROR);
+            //return $this->redirect('list', 'Observation');
+        //}
+
+    }
 }

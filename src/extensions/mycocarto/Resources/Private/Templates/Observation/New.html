@@ -11,6 +11,8 @@
 
     <f:render partial="FormErrors" />
 
+    <f:uri.action extensionName="mycocarto" pluginName="Autocomplete" controller="Species" action="getSpeciesByQuery" arguments="{q: 'ama p'}" />
+
     <f:form action="create" name="newObservation" object="{newObservation}">
         <f:render partial="Observation/FormFields" arguments="{speciesList: speciesList, ecologies: ecologies, trees: trees}" />
         <f:form.submit value="Ajouter" class="btn btn-default"/>

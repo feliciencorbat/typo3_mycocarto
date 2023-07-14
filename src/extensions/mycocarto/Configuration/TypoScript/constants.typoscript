@@ -1,0 +1,20 @@
+autocomplete = PAGE
+autocomplete {
+
+  typeNum = 999
+  10 = USER
+  10 {
+    extensionName = mycocarto
+    pluginName = Autocomplete
+    vendorName = Feliciencorbat
+  }
+
+  config {
+    disableAllHeaderCode = 1
+    additionalHeaders = Content-type:application/json
+    xhtml_cleaning = 0
+    admPanel = 0
+    debug = 0
+    no_cache = 1
+  }
+}
