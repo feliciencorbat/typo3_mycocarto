@@ -2,8 +2,10 @@
 
 namespace Feliciencorbat\Mycocarto\Domain\Model;
 
+use TYPO3\CMS\Extbase\Annotation\ORM\Lazy;
 use TYPO3\CMS\Extbase\Annotation\Validate;
 use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
+use TYPO3\CMS\Extbase\Persistence\Generic\LazyLoadingProxy;
 
 class Taxon extends AbstractEntity
 {
@@ -16,7 +18,11 @@ class Taxon extends AbstractEntity
     ])]
     protected string $scientificName;
 
-    protected ?Taxon $parentTaxon;
+    /**
+     * @var LazyLoadingProxy|Taxon|null
+     */
+    #[lazy]
+    protected Taxon|LazyLoadingProxy|null $parentTaxon;
 
     #[Validate([
         'validator' => 'NotEmpty'
