@@ -123,7 +123,6 @@ final class SpeciesController extends ActionController
         try {
             $params = $this->request->getQueryParams();
             $search = $params["term"];
-            $this->speciesRepository->setDefaultQuerySettings($this->speciesRepository->createQuery()->getQuerySettings()->setRespectStoragePage(false));
             $speciesList = $this->speciesRepository->getSpeciesByQuery($search);
             $jsonOutput = json_encode($speciesList);
             return $this->jsonResponse($jsonOutput);

@@ -113,11 +113,8 @@ class ObservationController extends ActionController
     #[IgnoreValidation(['argumentName' => 'newObservation'])]
     public function newAction(): ResponseInterface
     {
-        $this->speciesRepository->setDefaultQuerySettings($this->speciesRepository->createQuery()->getQuerySettings()->setRespectStoragePage(false));
         $speciesList = $this->speciesRepository->findAll();
-        $this->ecologyRepository->setDefaultQuerySettings($this->ecologyRepository->createQuery()->getQuerySettings()->setRespectStoragePage(false));
         $ecologies = $this->ecologyRepository->findAll();
-        $this->treeRepository->setDefaultQuerySettings($this->treeRepository->createQuery()->getQuerySettings()->setRespectStoragePage(false));
         $trees = $this->treeRepository->findAll();
         $this->view->assignMultiple([
             'speciesList' => $speciesList,
@@ -155,11 +152,8 @@ class ObservationController extends ActionController
     {
         try {
             $this->isAuthorized($observation);
-            $this->speciesRepository->setDefaultQuerySettings($this->speciesRepository->createQuery()->getQuerySettings()->setRespectStoragePage(false));
             $speciesList = $this->speciesRepository->findAll();
-            $this->ecologyRepository->setDefaultQuerySettings($this->ecologyRepository->createQuery()->getQuerySettings()->setRespectStoragePage(false));
             $ecologies = $this->ecologyRepository->findAll();
-            $this->treeRepository->setDefaultQuerySettings($this->treeRepository->createQuery()->getQuerySettings()->setRespectStoragePage(false));
             $trees = $this->treeRepository->findAll();
             $this->view->assignMultiple([
                 'speciesList' => $speciesList,
