@@ -36,3 +36,5 @@ autocomplete {
   }
   10 < tt_content.list.20.mycocarto_autocomplete
 }
+
+plugin.tx_mycocarto_observations.persistence.storagePid = 1
