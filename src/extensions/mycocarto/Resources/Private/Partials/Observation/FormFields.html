@@ -31,8 +31,8 @@
     <f:form.select class="form-control" property="species" id="species" options="{speciesList}" optionValueField="uid" optionLabelField="canonicalName" /><br />
     -->
 
-    <div id="selected_species"></div>
-    <f:form.textfield class="form-control" id="autocomplete_species" />
+    <div id="selected_species"><i>{observation.species.genus} {observation.species.species}</i> {observation.species.author}</div>
+    <f:form.textfield class="form-control" id="autocomplete_species" placeholder="Chercher l'espèce..."/>
     <f:form.hidden class="form-control" property="species" id="species" /><br />
 
 

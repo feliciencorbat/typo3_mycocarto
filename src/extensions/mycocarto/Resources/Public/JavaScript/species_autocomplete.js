@@ -5,7 +5,7 @@ $(function () {
         minLength: 2,
         select: function (event, ui) {
             $("#species").val(ui.item.uid);
-            $("#selected_species").empty().append("Espèce sélectionnée: <i>" + ui.item.genus + " " + ui.item.species + "</i> " + ui.item.author + "<br/>");
+            $("#selected_species").empty().append("<i>" + ui.item.genus + " " + ui.item.species + "</i> " + ui.item.author + "<br/>");
         }
 
     })
