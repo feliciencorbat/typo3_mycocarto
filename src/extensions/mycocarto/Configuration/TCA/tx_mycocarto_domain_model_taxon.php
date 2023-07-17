@@ -2,7 +2,7 @@
 
 return [
     'ctrl' => [
-        'title' => 'Taxon',
+        'title' => 'Taxons',
         'label' => 'scientific_name',
         'tstamp' => 'tstamp',
         'crdate' => 'crdate',

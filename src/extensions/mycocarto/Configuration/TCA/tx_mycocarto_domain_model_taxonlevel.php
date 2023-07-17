@@ -2,7 +2,7 @@
 
 return [
     'ctrl' => [
-        'title' => 'taxonlevel',
+        'title' => 'Niveaux du taxon',
         'label' => 'name',
         'tstamp' => 'tstamp',
         'crdate' => 'crdate',

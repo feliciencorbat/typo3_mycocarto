@@ -2,7 +2,7 @@
 
 return [
     'ctrl' => [
-        'title' => 'Ecology',
+        'title' => 'Ecologies',
         'label' => 'name',
         'tstamp' => 'tstamp',
         'crdate' => 'crdate',

@@ -4,7 +4,7 @@ use Feliciencorbat\Mycocarto\Documentation\Userfuncs\Tca\Tca;
 
 return [
     'ctrl' => [
-        'title' => 'Species',
+        'title' => 'Espèces',
         'label' => 'species',
         'label_userFunc' => Tca::class . '->completeSpeciesTitle',
         'tstamp' => 'tstamp',

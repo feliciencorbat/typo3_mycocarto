@@ -4,7 +4,7 @@ use Feliciencorbat\Mycocarto\Documentation\Userfuncs\Tca\Tca;
 
 return [
     'ctrl' => [
-        'title' => 'Observation',
+        'title' => 'Observations',
         'label' => 'date',
         'tstamp' => 'tstamp',
         'crdate' => 'crdate',

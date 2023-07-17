@@ -2,7 +2,7 @@
 
 return [
     'ctrl' => [
-        'title' => 'Tree',
+        'title' => 'Arbres',
         'label' => 'scientific_name',
         'tstamp' => 'tstamp',
         'crdate' => 'crdate',
