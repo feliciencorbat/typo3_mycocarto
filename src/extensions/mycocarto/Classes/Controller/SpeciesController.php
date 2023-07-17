@@ -119,10 +119,11 @@ final class SpeciesController extends ActionController
         }
     }
 
-    public function getSpeciesByQueryAction()
+    public function getSpeciesByQueryAction(): ResponseInterface
     {
         try {
-            $search = "Amanita";
+            $params = $this->request->getQueryParams();
+            $search = $params["term"];
             $this->speciesRepository->setDefaultQuerySettings($this->speciesRepository->createQuery()->getQuerySettings()->setRespectStoragePage(false));
             $speciesList = $this->speciesRepository->getSpeciesByQuery($search);
             $jsonOutput = json_encode($speciesList);

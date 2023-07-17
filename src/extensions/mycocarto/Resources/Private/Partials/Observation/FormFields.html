@@ -1,8 +1,11 @@
 <html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" data-namespace-typo3-fluid="true">
     <f:asset.css identifier="identifier3829465683" href="EXT:mycocarto/Resources/Public/Css/bootstrap-datepicker.css" />
+    <f:asset.css identifier="identifier3829465683" href="EXT:mycocarto/Resources/Public/Css/jquery-ui.min.css" />
     <f:asset.script identifier="identifier89739237587" src="EXT:mycocarto/Resources/Public/JavaScript/jquery3.7.0.min.js" />
     <f:asset.script identifier="identifier36547652765" src="EXT:mycocarto/Resources/Public/JavaScript/bootstrap-datepicker.min.js" />
     <f:asset.script identifier="identifier8384684" src="EXT:mycocarto/Resources/Public/JavaScript/bootstrap-datepicker.fr.min.js" />
+    <f:asset.script identifier="identifier8973923773647" src="EXT:mycocarto/Resources/Public/JavaScript/jquery-ui.min.js" />
+    <f:asset.script identifier="identifier8384676" src="EXT:mycocarto/Resources/Public/JavaScript/species_autocomplete.js" />
 
 
     <label for="date" class="form-label">
@@ -24,7 +27,14 @@
     <label for="species" class="form-label">
         Espèce <span class="required">(requise)</span>
     </label><br />
+    <!--
     <f:form.select class="form-control" property="species" id="species" options="{speciesList}" optionValueField="uid" optionLabelField="canonicalName" /><br />
+    -->
+
+    <div id="selected_species"></div>
+    <f:form.textfield class="form-control" id="autocomplete_species" />
+    <f:form.hidden class="form-control" property="species" id="species" /><br />
+
 
     <label for="ecology" class="form-label">
         Ecologie <span class="required">(requise)</span>
