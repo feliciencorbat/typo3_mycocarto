@@ -21,3 +21,18 @@ plugin.tx_bootstrappackage {
      layoutRootPaths.10 = EXT:mycocarto/Resources/Private/Extensions/Bootstrappackage/Layouts/
    }
 }
+
+autocomplete = PAGE
+autocomplete {
+  typeNum = 0
+  config {
+    disableAllHeaderCode = 1
+    additionalHeaders {
+      10 {
+        header = Content-Type: application/json
+        replace = 1
+      }
+    }
+  }
+  10 < tt_content.list.20.mycocarto_autocomplete
+}

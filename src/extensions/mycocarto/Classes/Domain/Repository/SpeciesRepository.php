@@ -2,11 +2,14 @@
 
 namespace Feliciencorbat\Mycocarto\Domain\Repository;
 
+use TYPO3\CMS\Belog\Domain\Model\Constraint;
 use TYPO3\CMS\Core\Database\ConnectionPool;
 use TYPO3\CMS\Extbase\Persistence\Exception\InvalidQueryException;
+use TYPO3\CMS\Extbase\Persistence\Generic\Storage\Typo3DbQueryParser;
 use TYPO3\CMS\Extbase\Persistence\QueryInterface;
 use TYPO3\CMS\Extbase\Persistence\QueryResultInterface;
 use TYPO3\CMS\Extbase\Persistence\Repository;
+use TYPO3\CMS\Extbase\Utility\DebuggerUtility;
 
 class SpeciesRepository extends Repository
 {
@@ -28,8 +31,23 @@ class SpeciesRepository extends Repository
     /**
      * @throws InvalidQueryException
      */
-    public function getSpeciesByQuery(string $search)
+    public function getSpeciesByQuery(string $search): array
     {
+        /*
+        $query = $this->createQuery();
+        $searchs = explode(" ", $search);
+
+        if(isset($searchs[1])) {
+            $query->logicalAnd(
+                $query->like('genus', '%' . $searchs[0] . '%'),
+                $query->like('species', '%' . $searchs[1] . '%')
+            );
+        } else {
+            $query->like('genus', '%' . $searchs[0] . '%');
+        }
+        return $query->execute();
+        */
+
         $searchs = explode(" ", $search);
         $queryBuilder = $this->connectionPool->getQueryBuilderForTable(ObservationRepository::TABLE_NAME);
         $queryBuilder
@@ -49,5 +67,6 @@ class SpeciesRepository extends Repository
         return $queryBuilder
             ->executeQuery()
             ->fetchAllAssociative();
+
     }
 }

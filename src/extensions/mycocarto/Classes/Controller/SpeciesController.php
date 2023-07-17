@@ -14,6 +14,8 @@ use TYPO3\CMS\Backend\Template\ModuleTemplateFactory;
 use TYPO3\CMS\Core\Type\ContextualFeedbackSeverity;
 use TYPO3\CMS\Extbase\Annotation\IgnoreValidation;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
+use TYPO3\CMS\Extbase\Mvc\View\JsonView;
+use TYPO3\CMS\Extbase\Utility\DebuggerUtility;
 
 #[Controller]
 final class SpeciesController extends ActionController
@@ -21,6 +23,12 @@ final class SpeciesController extends ActionController
     use PaginationTrait;
 
     const NB_SPECIES_PER_PAGE = 10;
+
+    /**
+     * @var JsonView
+     */
+    protected $defaultViewObjectName = JsonView::class;
+
 
     public function __construct(
         protected readonly SpeciesRepository $speciesRepository,
@@ -111,20 +119,18 @@ final class SpeciesController extends ActionController
         }
     }
 
-    public function getSpeciesByQueryAction(): ResponseInterface
+    public function getSpeciesByQueryAction()
     {
-        //try {
-            $search = $this->request->getArgument('q');
+        try {
+            $search = "Amanita";
             $this->speciesRepository->setDefaultQuerySettings($this->speciesRepository->createQuery()->getQuerySettings()->setRespectStoragePage(false));
             $speciesList = $this->speciesRepository->getSpeciesByQuery($search);
             $jsonOutput = json_encode($speciesList);
-            var_dump($jsonOutput);
-            die;
             return $this->jsonResponse($jsonOutput);
-        //} catch(Exception $e) {
-            //$this->addFlashMessage($e->getMessage(),'Erreur', ContextualFeedbackSeverity::ERROR);
-            //return $this->redirect('list', 'Observation');
-        //}
+        } catch(Exception $e) {
+            $this->addFlashMessage($e->getMessage(),'Erreur', ContextualFeedbackSeverity::ERROR);
+            return $this->redirect('list', 'Observation');
+        }
 
     }
 }
