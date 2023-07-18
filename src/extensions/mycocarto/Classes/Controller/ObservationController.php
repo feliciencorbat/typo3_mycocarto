@@ -18,7 +18,6 @@ use TYPO3\CMS\Core\Type\ContextualFeedbackSeverity;
 use TYPO3\CMS\Extbase\Annotation\IgnoreValidation;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
 use TYPO3\CMS\Extbase\Property\TypeConverter\DateTimeConverter;
-use TYPO3\CMS\Extbase\Utility\DebuggerUtility;
 
 #[Controller]
 class ObservationController extends ActionController
@@ -156,7 +155,8 @@ class ObservationController extends ActionController
             // if user is admin, he can change authors
             $authors = [];
             $user = $this->getCurrentUser();
-            if ($this->isAdmin($user)) {
+            $isAdmin = $this->isAdmin($user);
+            if ($isAdmin) {
                 $this->userRepository->setDefaultQuerySettings($this->speciesRepository->createQuery()->getQuerySettings()->setRespectStoragePage(false));
                 $authors = $this->userRepository->findAll();
             }
@@ -169,7 +169,8 @@ class ObservationController extends ActionController
                 'ecologies' => $ecologies,
                 'observation' => $observation,
                 'trees' => $trees,
-                'authors' => $authors
+                'authors' => $authors,
+                'isAdmin' => $isAdmin
             ]);
             return $this->htmlResponse();
         } catch (Exception $e) {
