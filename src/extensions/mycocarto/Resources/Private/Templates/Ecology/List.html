@@ -9,20 +9,22 @@
 
     <f:flashMessages />
 
-    <table class="table">
-        <tr>
-            <th>Nom</th>
-            <th></th>
-            <th></th>
-        </tr>
-        <f:for each="{ecologies}" as="ecology">
+    <div class="table-responsive">
+        <table class="table table-responsive">
             <tr>
-                <td>{ecology.name}</td>
-                <td><f:link.action action="edit" arguments="{ecology: ecology}" class="btn btn-default">Modifier</f:link.action></td>
-                <td><f:link.action action="delete" arguments="{ecology: ecology}" class="btn btn-danger">Supprimer</f:link.action></td>
+                <th>Nom</th>
+                <th></th>
+                <th></th>
             </tr>
-        </f:for>
-    </table>
+            <f:for each="{ecologies}" as="ecology">
+                <tr>
+                    <td>{ecology.name}</td>
+                    <td><f:link.action action="edit" arguments="{ecology: ecology}" class="btn btn-default">Modifier</f:link.action></td>
+                    <td><f:link.action action="delete" arguments="{ecology: ecology}" class="btn btn-danger">Supprimer</f:link.action></td>
+                </tr>
+            </f:for>
+        </table>
+    </div>
 
     <f:if condition="{paginator.NumberOfPages} > 1">
         <f:render partial="Pagination" arguments="{paginator: paginator, pagination: pagination}" />

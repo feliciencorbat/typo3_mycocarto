@@ -9,22 +9,24 @@
 
     <f:flashMessages />
 
-    <table class="table">
-        <tr>
-            <th>Nom scientifique</th>
-            <th>Famille</th>
-            <th></th>
-            <th></th>
-        </tr>
-        <f:for each="{speciesList}" as="species">
+    <div class="table-responsive">
+        <table class="table">
             <tr>
-                <td><span class="fst-italic">{species.genus} {species.species}</span> {species.author}</td>
-                <td>{species.family.scientificName}</td>
-                <td><f:link.action action="update" arguments="{species: species}" class="btn btn-default">Mettre à jour</f:link.action></td>
-                <td><f:link.action action="delete" arguments="{species: species}" class="btn btn-danger">Supprimer</f:link.action></td>
+                <th>Nom scientifique</th>
+                <th>Famille</th>
+                <th></th>
+                <th></th>
             </tr>
-        </f:for>
-    </table>
+            <f:for each="{speciesList}" as="species">
+                <tr>
+                    <td><span class="fst-italic">{species.genus} {species.species}</span> {species.author}</td>
+                    <td>{species.family.scientificName}</td>
+                    <td><f:link.action action="update" arguments="{species: species}" class="btn btn-default">Mettre à jour</f:link.action></td>
+                    <td><f:link.action action="delete" arguments="{species: species}" class="btn btn-danger">Supprimer</f:link.action></td>
+                </tr>
+            </f:for>
+        </table>
+    </div>
 
     <f:if condition="{paginator.NumberOfPages} > 1">
         <f:render partial="Pagination" arguments="{paginator: paginator, pagination: pagination}" />

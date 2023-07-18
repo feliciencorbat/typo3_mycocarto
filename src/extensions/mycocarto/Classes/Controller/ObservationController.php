@@ -87,9 +87,9 @@ class ObservationController extends ActionController
             $paginationInfos = $this->paginateObjectsList($itemsPerPage, $this->request, $allObservations);
 
             if ($isAdmin) {
-                $paginatedObservations = $this->observationRepository->findPaginatedObjects($itemsPerPage, $paginationInfos[2], ['date']);
+                $paginatedObservations = $this->observationRepository->findPaginatedObjects($itemsPerPage, $paginationInfos[2], ['date' => "DESC"]);
             } else {
-                $paginatedObservations = $this->observationRepository->findPaginatedObjects($itemsPerPage, $paginationInfos[2], ['date'], $user);
+                $paginatedObservations = $this->observationRepository->findPaginatedObjects($itemsPerPage, $paginationInfos[2], ['date' => "DESC"], $user);
             }
 
             $this->view->assignMultiple([

@@ -49,7 +49,7 @@ final class SpeciesController extends ActionController
         $allSpecies = $this->speciesRepository->findAll();
         $paginationInfos = $this->paginateObjectsList($itemsPerPage, $this->request, $allSpecies);
 
-        $paginatedSpecies = $this->speciesRepository->findPaginatedObjects($itemsPerPage, $paginationInfos[2], ['genus', 'species']);
+        $paginatedSpecies = $this->speciesRepository->findPaginatedObjects($itemsPerPage, $paginationInfos[2], ['genus' => "ASC", 'species' => "ASC"]);
 
         $moduleTemplate = $this->moduleTemplateFactory->create($this->request);
         $moduleTemplate->assignMultiple([

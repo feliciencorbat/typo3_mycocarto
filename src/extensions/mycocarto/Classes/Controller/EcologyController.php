@@ -40,7 +40,7 @@ final class EcologyController extends ActionController
         $allEcologies = $this->ecologyRepository->findAll();
         $paginationInfos = $this->paginateObjectsList($itemsPerPage, $this->request, $allEcologies);
 
-        $paginatedEcologies = $this->ecologyRepository->findPaginatedObjects($itemsPerPage, $paginationInfos[2], ['name']);
+        $paginatedEcologies = $this->ecologyRepository->findPaginatedObjects($itemsPerPage, $paginationInfos[2], ['name' => 'ASC']);
 
         $moduleTemplate = $this->moduleTemplateFactory->create($this->request);
         $moduleTemplate->assignMultiple([

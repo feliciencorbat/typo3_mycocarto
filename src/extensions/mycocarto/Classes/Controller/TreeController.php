@@ -36,7 +36,7 @@ final class TreeController extends ActionController
         $allTrees = $this->treeRepository->findAll();
         $paginationInfos = $this->paginateObjectsList($itemsPerPage, $this->request, $allTrees);
 
-        $paginatedTrees = $this->treeRepository->findPaginatedObjects($itemsPerPage, $paginationInfos[2], ['scientificName']);
+        $paginatedTrees = $this->treeRepository->findPaginatedObjects($itemsPerPage, $paginationInfos[2], ['scientificName' => "ASC"]);
 
         $moduleTemplate = $this->moduleTemplateFactory->create($this->request);
         $moduleTemplate->assignMultiple([

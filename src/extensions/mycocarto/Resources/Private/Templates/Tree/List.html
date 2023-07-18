@@ -9,22 +9,24 @@
 
     <f:flashMessages />
 
-    <table class="table">
-        <tr>
-            <th>Nom scientifique</th>
-            <th>Nom</th>
-            <th></th>
-            <th></th>
-        </tr>
-        <f:for each="{trees}" as="tree">
+    <div class="table-responsive">
+        <table class="table">
             <tr>
-                <td class="fst-italic">{tree.scientificName}</td>
-                <td>{tree.name}</td>
-                <td><f:link.action action="edit" arguments="{tree: tree}" class="btn btn-default">Modifier</f:link.action></td>
-                <td><f:link.action action="delete" arguments="{tree: tree}" class="btn btn-danger">Supprimer</f:link.action></td>
+                <th>Nom scientifique</th>
+                <th>Nom</th>
+                <th></th>
+                <th></th>
             </tr>
-        </f:for>
-    </table>
+            <f:for each="{trees}" as="tree">
+                <tr>
+                    <td class="fst-italic">{tree.scientificName}</td>
+                    <td>{tree.name}</td>
+                    <td><f:link.action action="edit" arguments="{tree: tree}" class="btn btn-default">Modifier</f:link.action></td>
+                    <td><f:link.action action="delete" arguments="{tree: tree}" class="btn btn-danger">Supprimer</f:link.action></td>
+                </tr>
+            </f:for>
+        </table>
+    </div>
     <f:if condition="{paginator.NumberOfPages} > 1">
         <f:render partial="Pagination" arguments="{paginator: paginator, pagination: pagination}" />
     </f:if>

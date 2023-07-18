@@ -23,8 +23,12 @@ trait PaginationTrait
     {
         //properties to order
         $orderingArray = [];
-        foreach($propertiesOrdering as $propertyOrdering) {
-            $orderingArray[$propertyOrdering] = QueryInterface::ORDER_ASCENDING;
+        foreach($propertiesOrdering as $key => $propertyOrdering) {
+            if ($propertyOrdering == "ASC") {
+                $orderingArray[$key] = QueryInterface::ORDER_ASCENDING;
+            } else {
+                $orderingArray[$key] = QueryInterface::ORDER_DESCENDING;
+            }
         }
 
         $query = $this->createQuery();
