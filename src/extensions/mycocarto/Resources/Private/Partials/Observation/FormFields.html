@@ -51,5 +51,10 @@
           {tree.completeName}
         </label><br />
       </f:for>
-    </div>
+    </div><br />
+
+    <label for="user" class="form-label">
+        Auteur <span class="required">(requise)</span>
+    </label><br />
+    <f:form.select class="form-control" property="user" id="user" options="{authors}" optionValueField="uid" optionLabelField="name" /><br />
 </html>

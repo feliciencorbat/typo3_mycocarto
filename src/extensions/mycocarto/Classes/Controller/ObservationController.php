@@ -12,13 +12,13 @@ use Feliciencorbat\Mycocarto\Domain\Repository\TreeRepository;
 use Feliciencorbat\Mycocarto\Domain\Repository\UserRepository;
 use Feliciencorbat\Mycocarto\Service\PdfReport;
 use Psr\Http\Message\ResponseInterface;
-use TCPDF;
 use TYPO3\CMS\Backend\Attribute\Controller;
 use TYPO3\CMS\Backend\Exception\AccessDeniedException;
 use TYPO3\CMS\Core\Type\ContextualFeedbackSeverity;
 use TYPO3\CMS\Extbase\Annotation\IgnoreValidation;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
 use TYPO3\CMS\Extbase\Property\TypeConverter\DateTimeConverter;
+use TYPO3\CMS\Extbase\Utility\DebuggerUtility;
 
 #[Controller]
 class ObservationController extends ActionController
@@ -152,6 +152,15 @@ class ObservationController extends ActionController
     {
         try {
             $this->isAuthorized($observation);
+
+            // if user is admin, he can change authors
+            $authors = [];
+            $user = $this->getCurrentUser();
+            if ($this->isAdmin($user)) {
+                $this->userRepository->setDefaultQuerySettings($this->speciesRepository->createQuery()->getQuerySettings()->setRespectStoragePage(false));
+                $authors = $this->userRepository->findAll();
+            }
+
             $speciesList = $this->speciesRepository->findAll();
             $ecologies = $this->ecologyRepository->findAll();
             $trees = $this->treeRepository->findAll();
@@ -159,7 +168,8 @@ class ObservationController extends ActionController
                 'speciesList' => $speciesList,
                 'ecologies' => $ecologies,
                 'observation' => $observation,
-                'trees' => $trees
+                'trees' => $trees,
+                'authors' => $authors
             ]);
             return $this->htmlResponse();
         } catch (Exception $e) {
