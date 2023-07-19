@@ -51,7 +51,7 @@ class User extends AbstractEntity
     }
 
     /**
-     * @param UserGroup $userGroup
+     * @param  UserGroup $userGroup
      * @return void
      */
     public function addUserGroup(UserGroup $userGroup): void
@@ -60,7 +60,7 @@ class User extends AbstractEntity
     }
 
     /**
-     * @param UserGroup $userGroup
+     * @param  UserGroup $userGroup
      * @return void
      */
     public function removeUserGroup(UserGroup $userGroup): void
@@ -75,6 +75,4 @@ class User extends AbstractEntity
     {
         $this->usergroup = $usergroup;
     }
-
-
 }

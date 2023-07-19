@@ -12,10 +12,10 @@ trait PaginationTrait
     /**
      * Find class objects with limit and page number, ordered by properties array
      *
-     * @param int $limit
-     * @param int $page
-     * @param array $propertiesOrdering
-     * @param User|null $user
+     * @param  int       $limit
+     * @param  int       $page
+     * @param  array     $propertiesOrdering
+     * @param  User|null $user
      * @return QueryResultInterface
      * @throws InvalidQueryException
      */
@@ -23,7 +23,7 @@ trait PaginationTrait
     {
         //properties to order
         $orderingArray = [];
-        foreach($propertiesOrdering as $key => $propertyOrdering) {
+        foreach ($propertiesOrdering as $key => $propertyOrdering) {
             if ($propertyOrdering == "ASC") {
                 $orderingArray[$key] = QueryInterface::ORDER_ASCENDING;
             } else {

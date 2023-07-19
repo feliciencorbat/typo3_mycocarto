@@ -22,8 +22,7 @@ final class TreeController extends ActionController
     public function __construct(
         protected readonly TreeRepository $treeRepository,
         protected readonly ModuleTemplateFactory $moduleTemplateFactory,
-    )
-    {
+    ) {
     }
 
 
@@ -39,11 +38,13 @@ final class TreeController extends ActionController
         $paginatedTrees = $this->treeRepository->findPaginatedObjects($itemsPerPage, $paginationInfos[2], ['scientificName' => "ASC"]);
 
         $moduleTemplate = $this->moduleTemplateFactory->create($this->request);
-        $moduleTemplate->assignMultiple([
+        $moduleTemplate->assignMultiple(
+            [
             'paginator' => $paginationInfos[0],
             'pagination' => $paginationInfos[1],
             'trees' => $paginatedTrees
-        ]);
+            ]
+        );
         return $moduleTemplate->renderResponse();
     }
 
@@ -67,7 +68,7 @@ final class TreeController extends ActionController
     }
 
     /**
-     * @param Tree $tree
+     * @param  Tree $tree
      * @return ResponseInterface
      */
     #[IgnoreValidation(['argumentName' => 'tree'])]
@@ -79,7 +80,7 @@ final class TreeController extends ActionController
     }
 
     /**
-     * @param Tree $tree
+     * @param  Tree $tree
      * @return ResponseInterface
      * @throws IllegalObjectTypeException
      * @throws UnknownObjectException
@@ -91,7 +92,7 @@ final class TreeController extends ActionController
     }
 
     /**
-     * @param Tree $tree
+     * @param  Tree $tree
      * @return ResponseInterface
      * @throws IllegalObjectTypeException
      */

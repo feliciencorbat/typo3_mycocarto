@@ -7,7 +7,8 @@ use TYPO3\CMS\Extbase\Mvc\RequestInterface;
 use TYPO3\CMS\Extbase\Pagination\QueryResultPaginator;
 use TYPO3\CMS\Extbase\Persistence\QueryResultInterface;
 
-trait PaginationTrait {
+trait PaginationTrait
+{
 
     public function paginateObjectsList(int $itemsPerPage, RequestInterface $request, QueryResultInterface $allObjects): array
     {
@@ -21,5 +22,4 @@ trait PaginationTrait {
 
         return [$paginator, $pagination, $currentPageNumber];
     }
-
 }

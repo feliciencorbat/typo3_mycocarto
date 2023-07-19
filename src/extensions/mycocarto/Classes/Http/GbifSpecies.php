@@ -17,22 +17,20 @@ final class GbifSpecies
 
     public function __construct(
         private readonly RequestFactory $requestFactory,
-    )
-    {
+    ) {
     }
 
     /**
      * Get species from GBIF by scientific name
      *
-     * @param string $scientificName
+     * @param  string $scientificName
      * @return Species
      * @throws BadRequestException
      * @throws JsonException
      */
     public function getSpeciesByScientificName(string $scientificName): Species
     {
-        if ($scientificName == "")
-        {
+        if ($scientificName == "") {
             throw new BadRequestException("Le nom scientifique ne peut pas être vide.", 404);
         }
 
@@ -60,7 +58,8 @@ final class GbifSpecies
         // test if response has valid JSON
         if ($response->getHeaderLine('Content-Type') !== 'application/json') {
             throw new RuntimeException(
-                "La requête n'a pas retourné du JSON valide", 500
+                "La requête n'a pas retourné du JSON valide",
+                500
             );
         }
 
@@ -96,8 +95,8 @@ final class GbifSpecies
     /**
      * Deserialize stdclass species in species class
      *
-     * @param stdClass $stdObjectSpecies
-     * @param $scientificName
+     * @param  stdClass $stdObjectSpecies
+     * @param  $scientificName
      * @return Species
      * @throws BadRequestException
      */
@@ -115,7 +114,7 @@ final class GbifSpecies
 
         // create all taxa and taxa levels
         $parentTaxon = null;
-        foreach($taxonsList as $key => $taxonName) {
+        foreach ($taxonsList as $key => $taxonName) {
             $taxon = new Taxon();
             $taxon->setScientificName($stdObjectSpecies->{$key});
             $taxonLevel = new TaxonLevel();

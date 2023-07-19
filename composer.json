@@ -45,7 +45,8 @@
 		"typo3/cms-webhooks": "^12.4.0"
 	},
 	"require-dev": {
-		"b13/make": "^0.1.6"
+		"b13/make": "^0.1.6",
+		"squizlabs/php_codesniffer": "^3.7"
 	},
 	"repositories": {
 		"0_local_packages": {

@@ -26,8 +26,7 @@ final class EcologyController extends ActionController
         protected readonly EcologyRepository $ecologyRepository,
         protected readonly ObservationRepository $observationRepository,
         protected readonly ModuleTemplateFactory $moduleTemplateFactory,
-    )
-    {
+    ) {
     }
 
 
@@ -43,11 +42,13 @@ final class EcologyController extends ActionController
         $paginatedEcologies = $this->ecologyRepository->findPaginatedObjects($itemsPerPage, $paginationInfos[2], ['name' => 'ASC']);
 
         $moduleTemplate = $this->moduleTemplateFactory->create($this->request);
-        $moduleTemplate->assignMultiple([
+        $moduleTemplate->assignMultiple(
+            [
             'paginator' => $paginationInfos[0],
             'pagination' => $paginationInfos[1],
             'ecologies' => $paginatedEcologies
-        ]);
+            ]
+        );
         return $moduleTemplate->renderResponse();
     }
 
@@ -71,7 +72,7 @@ final class EcologyController extends ActionController
     }
 
     /**
-     * @param Ecology $ecology
+     * @param  Ecology $ecology
      * @return ResponseInterface
      */
     #[IgnoreValidation(['argumentName' => 'ecology'])]
@@ -83,7 +84,7 @@ final class EcologyController extends ActionController
     }
 
     /**
-     * @param Ecology $ecology
+     * @param  Ecology $ecology
      * @return ResponseInterface
      * @throws IllegalObjectTypeException
      * @throws UnknownObjectException
@@ -95,7 +96,7 @@ final class EcologyController extends ActionController
     }
 
     /**
-     * @param Ecology $ecology
+     * @param  Ecology $ecology
      * @return ResponseInterface
      */
     public function deleteAction(Ecology $ecology): ResponseInterface
@@ -103,8 +104,8 @@ final class EcologyController extends ActionController
         try {
             $this->observationRepository->testIfEcologyExistsInObservation($ecology);
             $this->ecologyRepository->remove($ecology);
-        } catch(Exception $e) {
-            $this->addFlashMessage($e->getMessage(),'Erreur', ContextualFeedbackSeverity::ERROR);
+        } catch (Exception $e) {
+            $this->addFlashMessage($e->getMessage(), 'Erreur', ContextualFeedbackSeverity::ERROR);
         } finally {
             return $this->redirect('list');
         }

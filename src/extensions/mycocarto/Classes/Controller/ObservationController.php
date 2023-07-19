@@ -35,8 +35,7 @@ class ObservationController extends ActionController
         protected readonly TreeRepository $treeRepository,
         protected readonly UserRepository $userRepository,
         protected readonly PdfReport $pdfReport
-    )
-    {
+    ) {
     }
 
     /**
@@ -92,18 +91,19 @@ class ObservationController extends ActionController
                 $paginatedObservations = $this->observationRepository->findPaginatedObjects($itemsPerPage, $paginationInfos[2], ['date' => "DESC"], $user);
             }
 
-            $this->view->assignMultiple([
+            $this->view->assignMultiple(
+                [
                 'paginator' => $paginationInfos[0],
                 'pagination' => $paginationInfos[1],
                 'observations' => $paginatedObservations,
                 'isAdmin' => $isAdmin
-            ]);
+                ]
+            );
             return $this->htmlResponse();
         } catch (Exception $e) {
             $this->addFlashMessage($e->getMessage(), 'Erreur', ContextualFeedbackSeverity::ERROR);
             return $this->redirect('list');
         }
-
     }
 
     /**
@@ -116,11 +116,13 @@ class ObservationController extends ActionController
             $speciesList = $this->speciesRepository->findAll();
             $ecologies = $this->ecologyRepository->findAll();
             $trees = $this->treeRepository->findAll();
-            $this->view->assignMultiple([
+            $this->view->assignMultiple(
+                [
                 'speciesList' => $speciesList,
                 'ecologies' => $ecologies,
                 'trees' => $trees,
-            ]);
+                ]
+            );
             return $this->htmlResponse();
         } catch (Exception $e) {
             $this->addFlashMessage($e->getMessage(), 'Erreur', ContextualFeedbackSeverity::ERROR);
@@ -129,7 +131,7 @@ class ObservationController extends ActionController
     }
 
     /**
-     * @param Observation $newObservation
+     * @param  Observation $newObservation
      * @return ResponseInterface
      */
     public function createAction(Observation $newObservation): ResponseInterface
@@ -140,7 +142,6 @@ class ObservationController extends ActionController
 
             $this->observationRepository->add($newObservation);
             return $this->redirect('list');
-
         } catch (Exception $e) {
             $this->addFlashMessage($e->getMessage(), 'Erreur', ContextualFeedbackSeverity::ERROR);
             return $this->redirect('list');
@@ -148,7 +149,7 @@ class ObservationController extends ActionController
     }
 
     /**
-     * @param Observation $observation
+     * @param  Observation $observation
      * @return ResponseInterface
      */
     #[IgnoreValidation(['argumentName' => 'observation'])]
@@ -169,14 +170,16 @@ class ObservationController extends ActionController
             $speciesList = $this->speciesRepository->findAll();
             $ecologies = $this->ecologyRepository->findAll();
             $trees = $this->treeRepository->findAll();
-            $this->view->assignMultiple([
+            $this->view->assignMultiple(
+                [
                 'speciesList' => $speciesList,
                 'ecologies' => $ecologies,
                 'observation' => $observation,
                 'trees' => $trees,
                 'authors' => $authors,
                 'isAdmin' => $isAdmin
-            ]);
+                ]
+            );
             return $this->htmlResponse();
         } catch (Exception $e) {
             $this->addFlashMessage($e->getMessage(), 'Erreur', ContextualFeedbackSeverity::ERROR);
@@ -185,7 +188,7 @@ class ObservationController extends ActionController
     }
 
     /**
-     * @param Observation $observation
+     * @param  Observation $observation
      * @return ResponseInterface
      */
     public function updateAction(Observation $observation): ResponseInterface
@@ -198,11 +201,10 @@ class ObservationController extends ActionController
             $this->addFlashMessage($e->getMessage(), 'Erreur', ContextualFeedbackSeverity::ERROR);
             return $this->redirect('list');
         }
-
     }
 
     /**
-     * @param Observation $observation
+     * @param  Observation $observation
      * @return ResponseInterface
      */
     public function deleteAction(Observation $observation): ResponseInterface
@@ -218,14 +220,16 @@ class ObservationController extends ActionController
     }
 
     /**
-     * @param Observation $observation
+     * @param  Observation $observation
      * @return ResponseInterface
      */
     public function showMapAction(Observation $observation): ResponseInterface
     {
-        $this->view->assignMultiple([
+        $this->view->assignMultiple(
+            [
             'observation' => $observation,
-        ]);
+            ]
+        );
         return $this->htmlResponse();
     }
 
@@ -263,13 +267,13 @@ class ObservationController extends ActionController
     /**
      * Test if user is admin (belongs to mycocarto_frontend_admin)
      *
-     * @param User $user
+     * @param  User $user
      * @return bool
      */
     private function isAdmin(User $user): bool
     {
-        foreach($user->getUsergroup()->toArray() as $userGroup) {
-            if($userGroup->getTitle() == ObservationController::ADMIN_GROUP_NAME) {
+        foreach ($user->getUsergroup()->toArray() as $userGroup) {
+            if ($userGroup->getTitle() == ObservationController::ADMIN_GROUP_NAME) {
                 return true;
             }
         }
@@ -280,7 +284,7 @@ class ObservationController extends ActionController
     /**
      * Test if observation belongs to user or user is admin
      *
-     * @param Observation $observation
+     * @param  Observation $observation
      * @return void
      * @throws AccessDeniedException
      */

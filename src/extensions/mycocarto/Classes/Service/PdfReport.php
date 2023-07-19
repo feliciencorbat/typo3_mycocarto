@@ -31,7 +31,7 @@ class PdfReport extends TCPDF
         $pdf->SetFooterMargin(15);
 
         // set auto page breaks
-        $pdf->SetAutoPageBreak(TRUE, 20);
+        $pdf->SetAutoPageBreak(true, 20);
 
 
         $pdf->SetFont('helvetica', '', 14, '', true);
@@ -48,7 +48,7 @@ class PdfReport extends TCPDF
                                         <th><strong>Coordonnées</strong></th>
                                         <th><strong>Ecologie</strong></th>
                                     </tr>';
-        foreach($observations as $observation) {
+        foreach ($observations as $observation) {
             $observationsTable .= '<tr>
                                         <td>' . $observation->getDate()->format('d.m.Y') . '</td>
                                         <td><i>' . $observation->getSpecies()->getCanonicalName() . '</i> ' . $observation->getSpecies()->getAuthor() . '</td>

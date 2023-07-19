@@ -35,8 +35,7 @@ final class SpeciesController extends ActionController
         protected readonly GbifSpecies $gbifSpecies,
         protected readonly SpeciesWithTaxa $speciesWithTaxa,
         protected readonly ModuleTemplateFactory $moduleTemplateFactory,
-    )
-    {
+    ) {
     }
 
 
@@ -52,11 +51,13 @@ final class SpeciesController extends ActionController
         $paginatedSpecies = $this->speciesRepository->findPaginatedObjects($itemsPerPage, $paginationInfos[2], ['genus' => "ASC", 'species' => "ASC"]);
 
         $moduleTemplate = $this->moduleTemplateFactory->create($this->request);
-        $moduleTemplate->assignMultiple([
+        $moduleTemplate->assignMultiple(
+            [
             'paginator' => $paginationInfos[0],
             'pagination' => $paginationInfos[1],
             'speciesList' => $paginatedSpecies
-        ]);
+            ]
+        );
         return $moduleTemplate->renderResponse();
     }
 
@@ -80,14 +81,14 @@ final class SpeciesController extends ActionController
             $species = $this->gbifSpecies->getSpeciesByScientificName($scientificName);
             $this->speciesWithTaxa->persistCompleteSpecies($species, "create");
             return $this->redirect('list');
-        } catch(Exception $e) {
+        } catch (Exception $e) {
             $this->addFlashMessage($e->getMessage(), 'Erreur', ContextualFeedbackSeverity::ERROR);
             return $this->redirect('new');
         }
     }
 
     /**
-     * @param Species $species
+     * @param  Species $species
      * @return ResponseInterface
      */
     public function updateAction(Species $species): ResponseInterface
@@ -96,14 +97,14 @@ final class SpeciesController extends ActionController
             $species = $this->gbifSpecies->getSpeciesByScientificName($species->getCanonicalName());
             $this->speciesWithTaxa->persistCompleteSpecies($species, "update");
             return $this->redirect('list');
-        } catch(Exception $e) {
+        } catch (Exception $e) {
             $this->addFlashMessage($e->getMessage(), 'Erreur', ContextualFeedbackSeverity::ERROR);
             return $this->redirect('list');
         }
     }
 
     /**
-     * @param Species $species
+     * @param  Species $species
      * @return ResponseInterface
      */
     public function deleteAction(Species $species): ResponseInterface
@@ -111,8 +112,8 @@ final class SpeciesController extends ActionController
         try {
             $this->observationRepository->testIfSpeciesExistsInObservation($species);
             $this->speciesRepository->remove($species);
-        } catch(Exception $e) {
-            $this->addFlashMessage($e->getMessage(),'Erreur', ContextualFeedbackSeverity::ERROR);
+        } catch (Exception $e) {
+            $this->addFlashMessage($e->getMessage(), 'Erreur', ContextualFeedbackSeverity::ERROR);
         } finally {
             return $this->redirect('list');
         }
@@ -126,10 +127,9 @@ final class SpeciesController extends ActionController
             $speciesList = $this->speciesRepository->getSpeciesByQuery($search);
             $jsonOutput = json_encode($speciesList);
             return $this->jsonResponse($jsonOutput);
-        } catch(Exception $e) {
-            $this->addFlashMessage($e->getMessage(),'Erreur', ContextualFeedbackSeverity::ERROR);
+        } catch (Exception $e) {
+            $this->addFlashMessage($e->getMessage(), 'Erreur', ContextualFeedbackSeverity::ERROR);
             return $this->redirect('list', 'Observation');
         }
-
     }
 }

@@ -27,27 +27,31 @@ ExtensionUtility::configurePlugin(
     [SpeciesController::class => 'getSpeciesByQuery']
 );
 
-call_user_func(function()
-{
-    ExtensionManagementUtility::addTypoScript(
-        'mycocarto',
-        'constants',
-        "@import 'EXT:mycocarto/Configuration/TypoScript/constants.typoscript'"
-    );
-});
+call_user_func(
+    function () {
+        ExtensionManagementUtility::addTypoScript(
+            'mycocarto',
+            'constants',
+            "@import 'EXT:mycocarto/Configuration/TypoScript/constants.typoscript'"
+        );
+    }
+);
 
-call_user_func(function()
-{
-    ExtensionManagementUtility::addTypoScript(
-        'mycocarto',
-        'setup',
-        "@import 'EXT:mycocarto/Configuration/TypoScript/setup.typoscript'"
-    );
-});
+call_user_func(
+    function () {
+        ExtensionManagementUtility::addTypoScript(
+            'mycocarto',
+            'setup',
+            "@import 'EXT:mycocarto/Configuration/TypoScript/setup.typoscript'"
+        );
+    }
+);
 
 // Register custom EXT:form configuration
 if (ExtensionManagementUtility::isLoaded('form')) {
-    ExtensionManagementUtility::addTypoScriptSetup(trim('
+    ExtensionManagementUtility::addTypoScriptSetup(
+        trim(
+            '
         module.tx_form {
             settings {
                 yamlConfigurations {
@@ -62,5 +66,7 @@ if (ExtensionManagementUtility::isLoaded('form')) {
             }
         }
 }
-    '));
+    '
+        )
+    );
 }

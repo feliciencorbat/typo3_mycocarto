@@ -4,7 +4,6 @@ use Feliciencorbat\Mycocarto\Controller\EcologyController;
 use Feliciencorbat\Mycocarto\Controller\SpeciesController;
 use Feliciencorbat\Mycocarto\Controller\TreeController;
 
-
 return [
     'module' => [
         'labels' => ['title' => 'MycoCarto'],

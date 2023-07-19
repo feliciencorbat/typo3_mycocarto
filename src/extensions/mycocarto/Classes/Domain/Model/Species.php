@@ -7,36 +7,50 @@ use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
 
 class Species extends AbstractEntity
 {
-    #[Validate([
+    #[Validate(
+        [
         'validator' => 'StringLength',
         'options' => ['minimum' => 3, 'maximum' => 150],
-    ])]
-    #[Validate([
+        ]
+    )]
+    #[Validate(
+        [
         'validator' => 'NotEmpty'
-    ])]
+        ]
+    )]
     protected string $genus;
 
-    #[Validate([
+    #[Validate(
+        [
         'validator' => 'StringLength',
         'options' => ['minimum' => 3, 'maximum' => 150],
-    ])]
-    #[Validate([
+        ]
+    )]
+    #[Validate(
+        [
         'validator' => 'NotEmpty'
-    ])]
+        ]
+    )]
     protected string $species;
 
-    #[Validate([
+    #[Validate(
+        [
         'validator' => 'StringLength',
         'options' => ['minimum' => 3, 'maximum' => 150],
-    ])]
-    #[Validate([
+        ]
+    )]
+    #[Validate(
+        [
         'validator' => 'NotEmpty'
-    ])]
+        ]
+    )]
     protected ?string $author = null;
 
-    #[Validate([
+    #[Validate(
+        [
         'validator' => 'NotEmpty'
-    ])]
+        ]
+    )]
     protected Taxon $family;
 
     /**

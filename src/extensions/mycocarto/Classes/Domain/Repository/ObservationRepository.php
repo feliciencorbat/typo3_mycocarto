@@ -28,7 +28,7 @@ class ObservationRepository extends Repository
 
 
     /**
-     * @param Species $species
+     * @param  Species $species
      * @return void
      * @throws Exception
      * @throws \Doctrine\DBAL\Exception
@@ -39,7 +39,7 @@ class ObservationRepository extends Repository
     }
 
     /**
-     * @param Ecology $ecology
+     * @param  Ecology $ecology
      * @return void
      * @throws Exception
      * @throws \Doctrine\DBAL\Exception
@@ -50,9 +50,9 @@ class ObservationRepository extends Repository
     }
 
     /**
-     * @param string $column
-     * @param int $uid
-     * @param string $message
+     * @param  string $column
+     * @param  int    $uid
+     * @param  string $message
      * @return void
      * @throws Exception
      * @throws \Doctrine\DBAL\Exception

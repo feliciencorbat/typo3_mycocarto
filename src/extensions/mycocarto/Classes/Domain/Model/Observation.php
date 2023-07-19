@@ -10,36 +10,52 @@ use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
 
 class Observation extends AbstractEntity
 {
-    #[Validate([
+    #[Validate(
+        [
         'validator' => 'DateTime',
-    ])]
-    #[Validate([
+        ]
+    )]
+    #[Validate(
+        [
         'validator' => 'NotEmpty'
-    ])]
+        ]
+    )]
     protected ?DateTime $date = null;
 
-    #[Validate([
+    #[Validate(
+        [
         'validator' => 'NumberRange',
         'options' => ['minimum' => 450000, 'maximum' => 850000],
-    ])]
-    #[Validate([
+        ]
+    )]
+    #[Validate(
+        [
         'validator' => 'NotEmpty'
-    ])]
-    #[Validate([
+        ]
+    )]
+    #[Validate(
+        [
         'validator' => 'Float'
-    ])]
+        ]
+    )]
     protected ?float $latitude = null;
 
-    #[Validate([
+    #[Validate(
+        [
         'validator' => 'NumberRange',
         'options' => ['minimum' => 50000, 'maximum' => 300000],
-    ])]
-    #[Validate([
+        ]
+    )]
+    #[Validate(
+        [
         'validator' => 'NotEmpty'
-    ])]
-    #[Validate([
+        ]
+    )]
+    #[Validate(
+        [
         'validator' => 'Float'
-    ])]
+        ]
+    )]
     protected ?float $longitude = null;
 
     protected ?Ecology $ecology = null;
@@ -138,7 +154,7 @@ class Observation extends AbstractEntity
     }
 
     /**
-     * @param Tree $tree
+     * @param  Tree $tree
      * @return void
      */
     public function addTree(Tree $tree): void
@@ -147,7 +163,7 @@ class Observation extends AbstractEntity
     }
 
     /**
-     * @param Tree $tree
+     * @param  Tree $tree
      * @return void
      */
     public function removeTree(Tree $tree): void
@@ -156,7 +172,7 @@ class Observation extends AbstractEntity
     }
 
     /**
-     * @param ObjectStorage<Tree> $trees
+     * @param  ObjectStorage<Tree> $trees
      * @return void
      */
     public function setTrees(ObjectStorage $trees): void

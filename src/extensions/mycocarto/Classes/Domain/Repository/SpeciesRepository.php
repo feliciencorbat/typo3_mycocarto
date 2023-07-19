@@ -63,6 +63,5 @@ class SpeciesRepository extends Repository
         return $queryBuilder
             ->executeQuery()
             ->fetchAllAssociative();
-
     }
 }

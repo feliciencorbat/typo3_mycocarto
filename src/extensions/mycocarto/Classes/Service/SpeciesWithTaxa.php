@@ -21,8 +21,7 @@ class SpeciesWithTaxa
         protected readonly TaxonRepository $taxonRepository,
         protected readonly TaxonLevelRepository $taxonLevelRepository,
         protected readonly PersistenceManager $persistenceManager
-    )
-    {
+    ) {
     }
 
     /**
@@ -68,8 +67,8 @@ class SpeciesWithTaxa
             } else {
                 throw new BadRequestException("L'espèce existe déjà.", 404);
             }
-        // update species if update action
-        } else if ($action == "update") {
+            // update species if update action
+        } elseif ($action == "update") {
             $speciesFound = $this->speciesRepository->findOneBy(['genus' => $species->getGenus(), 'species' => $species->getSpecies()]);
             $speciesFound->setFamily($family);
             $speciesFound->setGenus($species->getGenus());
