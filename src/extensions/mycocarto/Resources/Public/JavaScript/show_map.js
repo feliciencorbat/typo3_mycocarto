@@ -27,7 +27,7 @@ let myIcon = L.icon(customIcon);
 
 let iconOptions = {
     title:"company name",
-    draggable:true,
+    draggable:false,
     icon:myIcon
 }
 
