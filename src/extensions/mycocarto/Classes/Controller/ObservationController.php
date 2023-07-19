@@ -112,15 +112,20 @@ class ObservationController extends ActionController
     #[IgnoreValidation(['argumentName' => 'newObservation'])]
     public function newAction(): ResponseInterface
     {
-        $speciesList = $this->speciesRepository->findAll();
-        $ecologies = $this->ecologyRepository->findAll();
-        $trees = $this->treeRepository->findAll();
-        $this->view->assignMultiple([
-            'speciesList' => $speciesList,
-            'ecologies' => $ecologies,
-            'trees' => $trees,
-        ]);
-        return $this->htmlResponse();
+        try {
+            $speciesList = $this->speciesRepository->findAll();
+            $ecologies = $this->ecologyRepository->findAll();
+            $trees = $this->treeRepository->findAll();
+            $this->view->assignMultiple([
+                'speciesList' => $speciesList,
+                'ecologies' => $ecologies,
+                'trees' => $trees,
+            ]);
+            return $this->htmlResponse();
+        } catch (Exception $e) {
+            $this->addFlashMessage($e->getMessage(), 'Erreur', ContextualFeedbackSeverity::ERROR);
+            return $this->redirect('list');
+        }
     }
 
     /**
