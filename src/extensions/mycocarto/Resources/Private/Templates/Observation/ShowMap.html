@@ -5,15 +5,18 @@
     <f:layout name="Default" />
 
     <f:section name="Content">
+        <f:asset.css identifier="identifier382946587678" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+        <f:asset.css identifier="identifier3829465876786" href="EXT:mycocarto/Resources/Public/Css/show_map.css" />
         <f:asset.script identifier="identifier89739237587" src="EXT:mycocarto/Resources/Public/JavaScript/jquery3.7.0.min.js" />
-        <f:asset.script identifier="identifier87387587" src="https://api3.geo.admin.ch/loader.js?lang=en" />
+        <f:asset.script identifier="identifier87387587" src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" />
+        <f:asset.script identifier="identifier87388493" src="EXT:mycocarto/Resources/Public/JavaScript/wgs84_lv03.js" />
         <f:asset.script identifier="identifier897329875" src="EXT:mycocarto/Resources/Public/JavaScript/show_map.js" />
 
         <h1>Carte de l'observation</h1>
 
         <f:flashMessages />
 
-        <div id="map" class="map" data-latitude="{observation.latitude}" data-longitude="{observation.longitude}"></div>
+        <div id="map" class="map" data-species="{observation.species.genus} {observation.species.species}" data-author="{observation.species.author}" data-latitude="{observation.latitude}" data-longitude="{observation.longitude}"></div>
 
     </f:section>
 </html>

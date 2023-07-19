@@ -1,47 +1,36 @@
 const mapEl  = document.querySelector('#map');
 const latitude = mapEl.dataset.latitude;
 const longitude = mapEl.dataset.longitude;
+const species = mapEl.dataset.species;
+const author = mapEl.dataset.author;
 
-let layer = ga.layer.create('ch.swisstopo.pixelkarte-farbe');
+// transform CH1903 to WGS84
+let coordsWGS84 = Swisstopo.CHtoWGS(latitude, longitude);
 
-// Create a map
-let map = new ga.Map({
-    target: 'map',
-    layers: [layer],
-    view: new ol.View({
-        resolution: 5,
-        center: [latitude, longitude]
-    })
-});
+let mapOptions = {
+    center:[coordsWGS84[1], coordsWGS84[0]],
+    zoom:15
+}
 
-// Create a feature
-let iconFeature = new ol.Feature({
-    geometry: new ol.geom.Point([latitude, longitude]),
-    name: "Observation"
-});
+let map = new L.map('map' , mapOptions);
 
-// Associate an icon style to the feature
-let iconStyle = new ol.style.Style({
-    image: new ol.style.Icon({
-        anchor: [.5, 1],
-        anchorXUnits: 'fraction',
-        anchorYUnits: 'fraction',
-        src: 'https://mycocartotypo.ddev.site:8043/fileadmin/logos/marker.png'
-    }),
-});
+let layer = new L.TileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png');
+map.addLayer(layer);
 
-iconFeature.setStyle(iconStyle);
+let customIcon = {
+    iconUrl:"https://mycocartotypo.ddev.site:8043/fileadmin/logos/marker.png",
+    iconSize:[40,40]
+}
 
-// Create a vector source
-let vectorSource = new ol.source.Vector({
-    features: [iconFeature]
-});
+let myIcon = L.icon(customIcon);
+//let myIcon = L.divIcon();
 
-// Create a vector layer using the vector source
-let vectorLayer = new ol.layer.Vector({
-    source: vectorSource
-});
+let iconOptions = {
+    title:"company name",
+    draggable:true,
+    icon:myIcon
+}
 
-// Add the vector layer in the map
-map.addLayer(vectorLayer);
-
+let marker = new L.Marker([coordsWGS84[1], coordsWGS84[0]] , iconOptions);
+marker.addTo(map);
+marker.bindPopup(`<p><i>${species}</i> ${author}</p>`);
