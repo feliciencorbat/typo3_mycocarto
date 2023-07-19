@@ -15,6 +15,7 @@
     <div class="table-responsive">
         <table class="table">
             <tr>
+                <th></th>
                 <th>Date</th>
                 <th>Nom scientifique</th>
                 <th>Ecologie</th>
@@ -28,6 +29,13 @@
             </tr>
             <f:for each="{observations}" as="observation">
                 <tr>
+                    <td>
+                        <f:if condition="{observation.image.originalResource.publicUrl}">
+                            <f:link.typolink parameter="{observation.image.originalResource.publicUrl}">
+                                <f:image src="{observation.image.originalResource.publicUrl}" width="100" />
+                            </f:link.typolink>
+                        </f:if>
+                    </td>
                     <td><f:format.date format="d.m.Y">{observation.date}</f:format.date></td>
                     <td><span class="fst-italic">{observation.species.genus} {observation.species.species}</span> {observation.species.author}</td>
                     <td>{observation.ecology.name}</td>
@@ -53,5 +61,4 @@
 
     <f:link.action action="new" class="btn btn-primary mt-4">Nouvelle observation</f:link.action>
 </f:section>
-<f:debug>{observation}</f:debug>
 </html>

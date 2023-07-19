@@ -89,10 +89,19 @@ return [
             ],
         ],
 
+        'image' => [
+            'label' => 'image',
+            'config' => [
+                'type' => 'file',
+                'maxitems' => 6,
+                'allowed' => 'common-image-types'
+            ]
+        ],
     ],
+
     'types' => [
         '0' => [
-            'showitem' => 'date, latitude, longitude, ecology, species, trees, user',
+            'showitem' => 'date, latitude, longitude, ecology, species, trees, user, image',
         ]
     ],
 ];

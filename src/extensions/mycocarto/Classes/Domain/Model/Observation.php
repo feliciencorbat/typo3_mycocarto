@@ -4,6 +4,7 @@ namespace Feliciencorbat\Mycocarto\Domain\Model;
 
 use DateTime;
 use TYPO3\CMS\Extbase\Annotation\Validate;
+use TYPO3\CMS\Extbase\Domain\Model\FileReference;
 use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
 use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
 
@@ -15,7 +16,7 @@ class Observation extends AbstractEntity
     #[Validate([
         'validator' => 'NotEmpty'
     ])]
-    protected DateTime $date;
+    protected ?DateTime $date = null;
 
     #[Validate([
         'validator' => 'NumberRange',
@@ -27,7 +28,7 @@ class Observation extends AbstractEntity
     #[Validate([
         'validator' => 'Float'
     ])]
-    protected float $latitude;
+    protected ?float $latitude = null;
 
     #[Validate([
         'validator' => 'NumberRange',
@@ -39,18 +40,20 @@ class Observation extends AbstractEntity
     #[Validate([
         'validator' => 'Float'
     ])]
-    protected float $longitude;
+    protected ?float $longitude = null;
 
-    protected Ecology $ecology;
+    protected ?Ecology $ecology = null;
 
     /**
      * @var ObjectStorage<Tree>
      */
     protected ObjectStorage $trees;
 
-    protected Species $species;
+    protected ?Species $species = null;
 
     protected ?User $user = null;
+
+    protected ?FileReference $image = null;
 
     public function __construct()
     {
@@ -63,65 +66,65 @@ class Observation extends AbstractEntity
     }
 
     /**
-     * @return DateTime
+     * @return DateTime|null
      */
-    public function getDate(): DateTime
+    public function getDate(): ?DateTime
     {
         return $this->date;
     }
 
     /**
-     * @param DateTime $date
+     * @param DateTime|null $date
      */
-    public function setDate(DateTime $date): void
+    public function setDate(?DateTime $date): void
     {
         $this->date = $date;
     }
 
     /**
-     * @return float
+     * @return float|null
      */
-    public function getLatitude(): float
+    public function getLatitude(): ?float
     {
         return $this->latitude;
     }
 
     /**
-     * @param float $latitude
+     * @param float|null $latitude
      */
-    public function setLatitude(float $latitude): void
+    public function setLatitude(?float $latitude): void
     {
         $this->latitude = $latitude;
     }
 
     /**
-     * @return float
+     * @return float|null
      */
-    public function getLongitude(): float
+    public function getLongitude(): ?float
     {
         return $this->longitude;
     }
 
     /**
-     * @param float $longitude
+     * @param float|null $longitude
      */
-    public function setLongitude(float $longitude): void
+    public function setLongitude(?float $longitude): void
     {
         $this->longitude = $longitude;
     }
 
     /**
-     * @return Ecology
+     * @return Ecology|null
      */
-    public function getEcology(): Ecology
+    public function getEcology(): ?Ecology
     {
         return $this->ecology;
     }
 
     /**
-     * @param Ecology $ecology
+     * @param Ecology|null $ecology
      */
-    public function setEcology(Ecology $ecology): void
+    public function setEcology(?Ecology $ecology): void
     {
         $this->ecology = $ecology;
     }
@@ -162,17 +165,17 @@ class Observation extends AbstractEntity
     }
 
     /**
-     * @return Species
+     * @return Species|null
      */
-    public function getSpecies(): Species
+    public function getSpecies(): ?Species
     {
         return $this->species;
     }
 
     /**
-     * @param Species $species
+     * @param Species|null $species
      */
-    public function setSpecies(Species $species): void
+    public function setSpecies(?Species $species): void
     {
         $this->species = $species;
     }
@@ -193,4 +196,19 @@ class Observation extends AbstractEntity
         $this->user = $user;
     }
 
+    /**
+     * @return FileReference|null
+     */
+    public function getImage(): ?FileReference
+    {
+        return $this->image;
+    }
+
+    /**
+     * @param FileReference|null $image
+     */
+    public function setImage(?FileReference $image): void
+    {
+        $this->image = $image;
+    }
 }
