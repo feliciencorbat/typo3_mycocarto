@@ -31,17 +31,15 @@ class NewSpeciesListener
                 $species = $this->gbifSpecies->getSpeciesByScientificName($scientificName);
                 $this->speciesWithTaxa->persistCompleteSpecies($species, "create");
             } catch(Exception $e) {
-                $flashMessageService = GeneralUtility::makeInstance(FlashMessageService::class);
-                $notificationQueue = $flashMessageService->getMessageQueueByIdentifier(
-                    FlashMessageQueue::NOTIFICATION_QUEUE
-                );
                 $message = GeneralUtility::makeInstance(FlashMessage::class,
                     $e->getMessage(),
                     "Erreur",
                     ContextualFeedbackSeverity::ERROR,
                     true
                 );
-                $notificationQueue->enqueue($message);
+                $flashMessageService = GeneralUtility::makeInstance(FlashMessageService::class);
+                $messageQueue = $flashMessageService->getMessageQueueByIdentifier("speciesListener");
+                $messageQueue->addMessage($message);
             }
         }
     }
