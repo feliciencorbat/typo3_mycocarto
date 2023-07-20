@@ -72,14 +72,12 @@ final class SpeciesController extends ActionController
     }
 
     /**
+     * @param string $scientificName
      * @return ResponseInterface
      */
-    public function createAction(): ResponseInterface
+    public function createAction(string $scientificName): ResponseInterface
     {
         try {
-            $scientificName = $this->request->getArgument('scientificName');
-            $species = $this->gbifSpecies->getSpeciesByScientificName($scientificName);
-            $this->speciesWithTaxa->persistCompleteSpecies($species, "create");
             return $this->redirect('list');
         } catch (Exception $e) {
             $this->addFlashMessage($e->getMessage(), 'Erreur', ContextualFeedbackSeverity::ERROR);
