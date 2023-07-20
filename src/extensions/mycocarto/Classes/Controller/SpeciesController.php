@@ -77,12 +77,7 @@ final class SpeciesController extends ActionController
      */
     public function createAction(string $scientificName): ResponseInterface
     {
-        try {
-            return $this->redirect('list');
-        } catch (Exception $e) {
-            $this->addFlashMessage($e->getMessage(), 'Erreur', ContextualFeedbackSeverity::ERROR);
-            return $this->redirect('new');
-        }
+        return $this->redirect('list');
     }
 
     /**
