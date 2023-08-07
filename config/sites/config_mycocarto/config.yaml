@@ -1,4 +1,4 @@
-base: 'https://mycocartotypo.ddev.site:8043/'
+base: 'https://mycocartotypo.ddev.site/'
 errorHandling:
   -
     errorCode: 403
