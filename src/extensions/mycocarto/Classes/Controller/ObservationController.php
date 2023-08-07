@@ -102,7 +102,7 @@ class ObservationController extends ActionController
             return $this->htmlResponse();
         } catch (Exception $e) {
             $this->addFlashMessage($e->getMessage(), 'Erreur', ContextualFeedbackSeverity::ERROR);
-            return $this->redirect('list');
+            return $this->redirectToUri('/');
         }
     }
 
