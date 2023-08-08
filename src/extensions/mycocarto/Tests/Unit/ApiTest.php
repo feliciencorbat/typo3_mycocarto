@@ -3,6 +3,7 @@
 namespace Feliciencorbat\Mycocarto\Tests\Unit;
 
 use Feliciencorbat\Mycocarto\Http\GbifSpecies;
+use JsonException;
 use TYPO3\CMS\Core\Error\Http\BadRequestException;
 use TYPO3\CMS\Core\Http\Client\GuzzleClientFactory;
 use TYPO3\CMS\Core\Http\RequestFactory;
@@ -10,7 +11,7 @@ use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 
 class ApiTest extends UnitTestCase
 {
-    private $gbifSpecies;
+    private ?GbifSpecies $gbifSpecies;
 
     protected function setUp(): void
     {
@@ -22,7 +23,7 @@ class ApiTest extends UnitTestCase
     /**
      * @test
      */
-    public function getSpeciesTest()
+    public function getSpeciesTest(): void
     {
         $species = $this->gbifSpecies->getSpeciesByScientificName("Amanita muscaria");
         $this->assertEquals("Amanita", $species->getGenus());
@@ -34,8 +35,9 @@ class ApiTest extends UnitTestCase
 
     /**
      * @test
+     * @throws JsonException
      */
-    public function getSpeciesNotSpeciesExceptionTest()
+    public function getSpeciesNotSpeciesExceptionTest(): void
     {
         //test if only genus and not species
         $request = "Amanita";
@@ -46,8 +48,9 @@ class ApiTest extends UnitTestCase
 
     /**
      * @test
+     * @throws JsonException
      */
-    public function getSpeciesUnknownExceptionTest()
+    public function getSpeciesUnknownExceptionTest(): void
     {
         //test if unknown species
         $request = "kjsbdjkbsfd";
@@ -58,8 +61,9 @@ class ApiTest extends UnitTestCase
 
     /**
      * @test
+     * @throws JsonException
      */
-    public function getSpeciesEmptyExceptionTest()
+    public function getSpeciesEmptyExceptionTest(): void
     {
         $this->expectException(BadRequestException::class);
         $this->expectExceptionMessage("Le nom scientifique ne peut pas être vide.");
