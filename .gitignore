@@ -12,3 +12,4 @@ nbproject
 !/public/typo3conf/AdditionalConfiguration.php
 /var/labels/
 /src/extensions/mycocarto/public/_assets
+/Tests/Acceptance/Support/_generated/
