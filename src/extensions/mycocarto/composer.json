@@ -11,9 +11,17 @@
         "georgringer/news": "^11.1",
         "bk2k/bootstrap-package": "^14.0"
     },
+    "require-dev": {
+        "typo3/testing-framework": "^8"
+    },
     "autoload": {
         "psr-4": {
             "Feliciencorbat\\Mycocarto\\": "Classes/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Feliciencorbat\\Mycocarto\\Tests\\": "Tests"
         }
     },
     "extra": {
@@ -22,6 +30,8 @@
         }
     },
     "config": {
+        "vendor-dir": ".Build/vendor",
+        "bin-dir": ".Build/bin",
         "allow-plugins": {
             "typo3/cms-composer-installers": true,
             "typo3/class-alias-loader": true

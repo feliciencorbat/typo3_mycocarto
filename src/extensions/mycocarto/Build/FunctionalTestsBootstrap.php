@@ -1,5 +1,4 @@
 <?php
-
 /*
  * This file is part of the TYPO3 CMS project.
  *
@@ -13,9 +12,9 @@
  * The TYPO3 project - inspiring people to share!
  */
 
-// Set up the application for the frontend
-call_user_func(static function () {
-    $classLoader = require dirname(__DIR__).'/.Build/vendor/autoload.php';
-    \TYPO3\CMS\Core\Core\SystemEnvironmentBuilder::run(0, \TYPO3\CMS\Core\Core\SystemEnvironmentBuilder::REQUESTTYPE_FE);
-    \TYPO3\CMS\Core\Core\Bootstrap::init($classLoader)->get(\TYPO3\CMS\Frontend\Http\Application::class)->run();
+call_user_func(function () {
+    $testbase = new \TYPO3\TestingFramework\Core\Testbase();
+    $testbase->defineOriginalRootPath();
+    $testbase->createDirectory(ORIGINAL_ROOT . 'typo3temp/var/tests');
+    $testbase->createDirectory(ORIGINAL_ROOT . 'typo3temp/var/transient');
 });

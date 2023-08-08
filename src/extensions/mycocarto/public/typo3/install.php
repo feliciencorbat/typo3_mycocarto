@@ -13,10 +13,8 @@
  * The TYPO3 project - inspiring people to share!
  */
 
-call_user_func(
-    static function () {
-        $classLoader = include dirname(dirname(__DIR__)).'/vendor/autoload.php';
-        \TYPO3\CMS\Core\Core\SystemEnvironmentBuilder::run(1, \TYPO3\CMS\Core\Core\SystemEnvironmentBuilder::REQUESTTYPE_INSTALL);
-        \TYPO3\CMS\Core\Core\Bootstrap::init($classLoader, true)->get(\TYPO3\CMS\Install\Http\Application::class)->run();
-    }
-);
+call_user_func(static function () {
+    $classLoader = require dirname(dirname(__DIR__)).'/.Build/vendor/autoload.php';
+    \TYPO3\CMS\Core\Core\SystemEnvironmentBuilder::run(1, \TYPO3\CMS\Core\Core\SystemEnvironmentBuilder::REQUESTTYPE_INSTALL);
+    \TYPO3\CMS\Core\Core\Bootstrap::init($classLoader, true)->get(\TYPO3\CMS\Install\Http\Application::class)->run();
+});

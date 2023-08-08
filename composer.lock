@@ -962,13 +962,16 @@
             "dist": {
                 "type": "path",
                 "url": "src/extensions/mycocarto",
-                "reference": "aabb203d998d70ae8846c587c836f33dad8d359c"
+                "reference": "272cac336596af8a36fb7526100a5620f99740ee"
             },
             "require": {
                 "bk2k/bootstrap-package": "^14.0",
                 "georgringer/news": "^11.1",
                 "typo3/cms-core": "^12.4",
                 "typo3/cms-form": "^12.4"
+            },
+            "require-dev": {
+                "typo3/testing-framework": "^8"
             },
             "type": "typo3-cms-extension",
             "extra": {
@@ -979,6 +982,11 @@
             "autoload": {
                 "psr-4": {
                     "Feliciencorbat\\Mycocarto\\": "Classes/"
+                }
+            },
+            "autoload-dev": {
+                "psr-4": {
+                    "Feliciencorbat\\Mycocarto\\Tests\\": "Tests"
                 }
             },
             "license": [

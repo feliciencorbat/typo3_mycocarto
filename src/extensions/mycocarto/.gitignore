@@ -1,0 +1,7 @@
+.Build/
+.idea/
+Build/testing-docker/.env
+composer.lock
+/public/typo3conf/
+/public/typo3temp/
+/var/
