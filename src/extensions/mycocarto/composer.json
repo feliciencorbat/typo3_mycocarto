@@ -36,5 +36,13 @@
             "typo3/cms-composer-installers": true,
             "typo3/class-alias-loader": true
         }
+    },
+    "scripts": {
+        "unit-tests": [
+            "Build/Scripts/runTests.sh"
+        ],
+        "functional-tests": [
+            "Build/Scripts/runTests.sh -s functional"
+        ]
     }
 }
