@@ -15,6 +15,7 @@ class ApiTest extends UnitTestCase
 
     protected function setUp(): void
     {
+        parent::setUp();
         $guzzleFactory = new GuzzleClientFactory();
         $requestFactory = new RequestFactory($guzzleFactory);
         $this->gbifSpecies = new GbifSpecies($requestFactory);
@@ -72,6 +73,7 @@ class ApiTest extends UnitTestCase
 
     protected function tearDown(): void
     {
+        parent::tearDown();
         $this->gbifSpecies = null;
     }
 }
