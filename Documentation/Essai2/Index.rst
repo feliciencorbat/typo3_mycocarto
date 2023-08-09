@@ -1,36 +1,8 @@
 .. include:: /Includes.rst.txt
-..  _start:
 
 ============
-Mycocarto
+Page d'essai 2
 ============
-
-.. Table of Contents
-
-.. toctree::
-
-  Essai/Index
-  Essai2/Index
-
-----
-
-:Version:
-   |release|
-
-:Language:
-   en
-
-:Author:
-   TYPO3 contributors
-
-:License:
-   This document is published under the
-   `Open Publication License <https://www.opencontent.org/openpub/>`__.
-
-:Rendered:
-   |today|
-
-Pour compiler la documentation: `documentation officiel de rendu du format rst (reStructuredText) <https://docs.typo3.org/m/typo3/docs-how-to-document/main/en-us/RenderingDocs/Index.html>`__
 
 Lorem ipsum dolor sit amet libero do vestibulum massa sodales velit quam pharetra.
 
@@ -87,10 +59,3 @@ senectus incididunt. Posuere lacinia senectus convallis viverra porta ultrices n
 Aliqua blandit sed nulla duis euismod imperdiet ornare massa elementum neque interdum porta fusce mauris.
 Egestas vel in ullamcorper orci suspendisse pellentesque magna curabitur nibh eros mi.
 Scelerisque fermentum massa posuere est nisl convallis interdum lacus volutpat fermentum.
-
-Test image
-============
-
-.. image:: images/screenshot.png
-   :class: with-shadow
-   :scale: 70
